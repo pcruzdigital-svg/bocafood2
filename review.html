@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deja tu opinión | Bocado Brasil</title>
+<meta name="robots" content="noindex">
+<link rel="icon" id="site-favicon" type="image/png" href="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@700;800;900&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --red:#C4362A;--red-dark:#9E2418;
+  --off-white:#FBF5F3;--white:#FFFFFF;
+  --gray-light:#F2EDED;--gray-mid:#D4C8C6;
+  --gray-text:#8A7E7C;--dark:#1A1A1A;
+  --radius:16px;
+  --shadow-sm:0 2px 8px rgba(0,0,0,.07);
+  --shadow-md:0 6px 24px rgba(0,0,0,.11);
+}
+body{font-family:'Work Sans',sans-serif;background:var(--off-white);color:var(--dark);min-height:100vh;display:flex;flex-direction:column}
+.mi{font-family:'Material Icons Round';font-style:normal;font-weight:normal;line-height:1;display:inline-block;vertical-align:middle;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-smoothing:antialiased;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';user-select:none}
+
+header{background:var(--white);border-bottom:1px solid var(--gray-light);box-shadow:var(--shadow-sm)}
+.header-inner{max-width:480px;margin:0 auto;padding:13px 20px;display:flex;align-items:center;justify-content:center}
+.logo-fallback{font-family:'League Spartan',sans-serif;font-size:19px;font-weight:800;color:var(--red)}
+.logo img{height:40px;width:auto;display:block}
+
+.hero-strip{background:linear-gradient(135deg,#C4362A,#8E1F14);padding:28px 20px 24px;text-align:center}
+.hero-strip h1{font-family:'League Spartan',sans-serif;font-size:26px;font-weight:800;color:#fff;letter-spacing:-.5px;margin-bottom:6px}
+.hero-strip p{color:rgba(255,255,255,.8);font-size:14px}
+
+.form-wrap{max-width:480px;margin:0 auto;padding:24px 16px 40px;flex:1}
+.card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow-md);padding:24px 20px}
+
+.step-label{font-size:11px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px}
+
+/* Star rating */
+.stars-wrap{display:flex;gap:8px;justify-content:center;margin:4px 0 20px}
+.star-btn{background:none;border:none;cursor:pointer;font-size:40px;line-height:1;color:var(--gray-mid);transition:color .15s,transform .1s;padding:4px}
+.star-btn:hover,.star-btn.active{color:#FFD166;transform:scale(1.1)}
+.star-hint{text-align:center;font-size:13px;font-weight:600;color:var(--gray-text);min-height:20px;margin-bottom:16px;transition:color .2s}
+
+/* Form fields */
+.form-group{margin-bottom:16px}
+.form-group label{display:block;font-size:12px;font-weight:700;color:var(--gray-text);text-transform:uppercase;letter-spacing:.3px;margin-bottom:6px}
+.form-group input,.form-group textarea,.form-group select{width:100%;padding:12px 14px;border:1.5px solid var(--gray-mid);border-radius:11px;font-size:14px;font-family:'Work Sans',sans-serif;font-weight:500;background:var(--white);color:var(--dark);outline:none;transition:border-color .2s;resize:vertical}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--red)}
+.form-group textarea{min-height:100px}
+
+.submit-btn{width:100%;padding:15px;background:var(--red);color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:700;font-family:'Work Sans',sans-serif;cursor:pointer;transition:background .2s;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:8px}
+.submit-btn:hover{background:var(--red-dark)}
+.submit-btn:disabled{background:var(--gray-mid);cursor:not-allowed}
+
+/* Success state */
+.success-card{text-align:center;display:none}
+.success-icon{font-size:64px;margin-bottom:16px}
+.success-title{font-family:'League Spartan',sans-serif;font-size:26px;font-weight:800;color:var(--dark);margin-bottom:8px}
+.success-sub{font-size:14px;color:var(--gray-text);line-height:1.6;margin-bottom:24px}
+.back-btn{display:inline-flex;align-items:center;gap:6px;background:var(--red);color:#fff;padding:12px 22px;border-radius:12px;font-size:14px;font-weight:700;text-decoration:none;transition:background .2s}
+.back-btn:hover{background:var(--red-dark)}
+
+/* Already submitted */
+.already-card{text-align:center;padding:16px 0}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">
+      <img id="site-logo" src="" alt="Bocado Brasil" onerror="this.style.display='none';document.getElementById('logo-fallback').style.display='block'">
+      <span class="logo-fallback" id="logo-fallback" style="display:none">Bocado Brasil</span>
+    </div>
+  </div>
+</header>
+
+<div class="hero-strip">
+  <h1>¿Cómo fue tu experiencia?</h1>
+  <p>Tu opinión nos ayuda a mejorar y a llegar a más personas</p>
+</div>
+
+<div class="form-wrap">
+  <div class="card" id="form-card">
+    <div class="step-label">Deja tu valoración</div>
+
+    <!-- Stars -->
+    <div class="stars-wrap" id="stars-wrap">
+      <button class="star-btn" data-v="1" onclick="setStar(1)" title="1 estrella">★</button>
+      <button class="star-btn" data-v="2" onclick="setStar(2)" title="2 estrellas">★</button>
+      <button class="star-btn" data-v="3" onclick="setStar(3)" title="3 estrellas">★</button>
+      <button class="star-btn" data-v="4" onclick="setStar(4)" title="4 estrellas">★</button>
+      <button class="star-btn" data-v="5" onclick="setStar(5)" title="5 estrellas">★</button>
+    </div>
+    <div class="star-hint" id="star-hint">Toca las estrellas para valorar</div>
+
+    <div class="form-group">
+      <label>Tu nombre</label>
+      <input type="text" id="r-name" placeholder="Ex: María G." maxlength="60" autocomplete="name">
+    </div>
+
+    <div class="form-group">
+      <label>Comentario</label>
+      <textarea id="r-comment" placeholder="¿Qué te pareció? ¿Qué pediste?" maxlength="500"></textarea>
+    </div>
+
+    <div class="form-group" id="product-group" style="display:none">
+      <label>¿Qué pediste? <span style="font-weight:400;color:var(--gray-text)">(opcional)</span></label>
+      <select id="r-product">
+        <option value="">— Seleccionar producto —</option>
+      </select>
+    </div>
+
+    <div id="form-error" style="display:none;background:#FFF0EE;border-radius:9px;padding:10px 14px;font-size:13px;font-weight:600;color:var(--red);margin-bottom:12px"></div>
+
+    <button class="submit-btn" id="submit-btn" onclick="submitReview()">
+      <span class="mi">send</span> Enviar valoración
+    </button>
+    <p style="font-size:11px;color:var(--gray-text);text-align:center;margin-top:10px;line-height:1.5">
+      Tu valoración será revisada antes de publicarse.<br>No compartimos tus datos con terceros.
+    </p>
+  </div>
+
+  <!-- Already submitted -->
+  <div class="card already-card" id="already-card" style="display:none">
+    <div class="success-icon">🙏</div>
+    <div class="success-title">¡Ya enviaste tu opinión!</div>
+    <div class="success-sub">Gracias por tu valoración anterior. Nos alegra mucho saber de ti.</div>
+    <a href="index.html" class="back-btn"><span class="mi">storefront</span> Ver menú</a>
+  </div>
+
+  <!-- Success -->
+  <div class="card success-card" id="success-card">
+    <div class="success-icon">🎉</div>
+    <div class="success-title">¡Gracias por tu opinión!</div>
+    <div class="success-sub">
+      Tu valoración se abrió en WhatsApp — solo pulsa <strong>Enviar</strong> para que lleguemos a verla.<br><br>
+      ¡Tu apoyo nos da mucha energía! 💚
+    </div>
+    <a href="index.html" class="back-btn"><span class="mi">storefront</span> Volver al menú</a>
+  </div>
+</div>
+
+<script>
+// Phone injected at publish time — fallback is the default number
+const WA_PHONE=/*[[BOCA_PHONE]]*/'34611878234'/*[[BOCA_PHONE_END]]*/;
+const CFG_KEY='bocadoBrasilConfig';
+const SUBMITTED_KEY='bocadoBrasilReviewSubmitted';
+const STAR_HINTS=['','¡Muy malo!','Podría mejorar','Está bien','¡Muy bueno!','¡Excelente!'];
+
+let selectedStars=0;
+let siteProd=[];
+
+// Load cfg for logo + products (shared localStorage — same domain as index.html on GitHub Pages)
+let cfg={};
+try{const s=localStorage.getItem(CFG_KEY);if(s)cfg=JSON.parse(s);}catch(e){}
+
+// Favicon
+if(cfg.faviconUrl){const fv=document.getElementById('site-favicon');if(fv)fv.href=cfg.faviconUrl;}
+
+// Logo
+const logoImg=document.getElementById('site-logo');
+if(cfg.logoUrl){logoImg.src=cfg.logoUrl;}
+else{logoImg.style.display='none';document.getElementById('logo-fallback').style.display='block';}
+
+// Products list (for "¿Qué pediste?" select)
+try{
+  const s=localStorage.getItem('bocadoBrasilProducts');
+  if(s) siteProd=JSON.parse(s).filter(p=>p.menuVisible!==false);
+}catch(e){}
+
+if(siteProd.length>0){
+  const sel=document.getElementById('r-product');
+  siteProd.forEach(p=>{
+    const opt=document.createElement('option');
+    opt.value=p.id; opt.textContent=p.name;
+    sel.appendChild(opt);
+  });
+  document.getElementById('product-group').style.display='block';
+}
+
+// Prevent re-submission from same device
+if(localStorage.getItem(SUBMITTED_KEY)){
+  document.getElementById('form-card').style.display='none';
+  document.getElementById('already-card').style.display='block';
+}
+
+function setStar(n){
+  selectedStars=n;
+  document.querySelectorAll('.star-btn').forEach((btn,i)=>btn.classList.toggle('active',i<n));
+  const hint=document.getElementById('star-hint');
+  hint.textContent=STAR_HINTS[n]||'';
+  hint.style.color=n>=4?'#1A9E5A':n>=3?'#B45309':'var(--red)';
+}
+
+function submitReview(){
+  const name=document.getElementById('r-name').value.trim();
+  const comment=document.getElementById('r-comment').value.trim();
+  const productId=document.getElementById('r-product').value;
+  const productName=productId?(siteProd.find(p=>p.id==productId)?.name||''):'';
+  const errEl=document.getElementById('form-error');
+
+  errEl.style.display='none';
+  if(!selectedStars){errEl.textContent='Por favor, selecciona una valoración con estrellas.';errEl.style.display='block';return;}
+  if(!name){errEl.textContent='Por favor, escribe tu nombre.';errEl.style.display='block';return;}
+  if(!comment){errEl.textContent='Por favor, escribe un comentario.';errEl.style.display='block';return;}
+
+  // Build WhatsApp message
+  const stars='⭐'.repeat(selectedStars);
+  let msg=`⭐ Nueva valoración — Bocado Brasil\n\n`;
+  msg+=`👤 Nombre: ${name}\n`;
+  msg+=`${stars} Nota: ${selectedStars}/5\n`;
+  if(productName) msg+=`🍽️ Producto: ${productName}\n`;
+  msg+=`💬 Comentario:\n"${comment}"\n\n`;
+  msg+=`📅 Fecha: ${new Date().toLocaleDateString('es-ES')}`;
+
+  // Open WhatsApp
+  setTimeout(()=>{window.open('https://wa.me/'+WA_PHONE+'?text='+encodeURIComponent(msg),'_blank');},300);
+
+  // Show brief success banner, then reset form cleanly
+  const formCard=document.getElementById('form-card');
+  const successCard=document.getElementById('success-card');
+  formCard.style.display='none';
+  successCard.style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+
+  setTimeout(()=>{
+    // Reset all fields
+    selectedStars=0;
+    document.querySelectorAll('.star-btn').forEach(b=>b.classList.remove('active'));
+    document.getElementById('star-hint').textContent='Toca las estrellas para valorar';
+    document.getElementById('star-hint').style.color='';
+    document.getElementById('r-name').value='';
+    document.getElementById('r-comment').value='';
+    document.getElementById('r-product').value='';
+    document.getElementById('form-error').style.display='none';
+    // Back to clean form
+    successCard.style.display='none';
+    formCard.style.display='block';
+    window.scrollTo({top:0,behavior:'smooth'});
+  },3500);
+}
+</script>
+</body>
+</html>
