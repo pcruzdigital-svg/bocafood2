@@ -1106,8 +1106,8 @@ function getDayRanges(dh){
   return ranges;
 }
 function getStatus(){
-  if(cfg.manualClosed)return{open:false,text:'Cerrado temporalmente'};
-  const hours=cfg.hours&&cfg.hours.length?cfg.hours:DEFAULT_CFG.hours;
+  if(cfg.manualClosed)return{open:false,text:cfg.closedMessage||'Cerrado temporalmente'};
+  const hours=cfg.hours||DEFAULT_CFG.hours;
   const now=new Date(),dh=hours[now.getDay()],n=now2m();
   if(dh&&dh.enabled){
     const ranges=getDayRanges(dh);
@@ -1129,7 +1129,8 @@ function genSlots(){
   const now=new Date(),slots=[];
   for(let day=0;day<=6;day++){
     const d=new Date();d.setDate(d.getDate()+day);
-    const dh=cfg.hours[d.getDay()];
+    const hours=cfg.hours||DEFAULT_CFG.hours;
+    const dh=hours[d.getDay()];
     if(!dh||!dh.enabled||cfg.manualClosed)continue;
     const ranges=getDayRanges(dh);
     const dl=day===0?'Hoy':day===1?'Mañana':DAYS_CAP[d.getDay()];
@@ -2250,9 +2251,13 @@ async function loadTenantPreviewData(){
       tenantDoc('config','integracoes').get(),
       tenantDoc('config','seo').get(),
       tenantDoc('config','template').get(),
+      tenantDoc('config','operacao').get(),
+      tenantDoc('config','horarios').get(),
+      tenantDoc('config','zonas').get(),
       tenantCol('products').get(),
       tenantCol('categories').get(),
       tenantCol('upsells').get(),
+      tenantCol('upsellRules').get(),
       tenantCol('reviews').get(),
       tenantCol('coupons').get()
     ]);
@@ -2263,18 +2268,22 @@ async function loadTenantPreviewData(){
     const integracoes=docs[4].exists?docs[4].data():{};
     const seo=docs[5].exists?docs[5].data():{};
     const template=docs[6].exists?docs[6].data():{};
-    const tenantProducts=docs[7].docs.map(d=>normalizeTenantProduct(d.id,d.data()));
-    const tenantCats=docs[8].docs.map(d=>({id:d.id,label:d.data().name||d.data().label||d.id,hidden:d.data().hidden||false}));
-    const tenantUpsells=docs[9].docs.map(d=>({id:d.id,...d.data()}));
-    const tenantReviews=docs[10].docs.map(d=>({id:d.id,...d.data()})).filter(r=>r.status==='approved');
-    const tenantCoupons=docs[11].docs.map(d=>({id:d.id,...d.data()}));
+    const operacao=docs[7].exists?docs[7].data():{};
+    const horarios=docs[8].exists?docs[8].data():{};
+    const zonas=docs[9].exists?docs[9].data():{};
+    const tenantProducts=docs[10].docs.map(d=>normalizeTenantProduct(d.id,d.data()));
+    const tenantCats=docs[11].docs.map(d=>({id:d.id,label:d.data().name||d.data().label||d.id,hidden:d.data().hidden||false}));
+    const tenantUpsells=docs[12].docs.map(d=>({id:d.id,...d.data()}));
+    const tenantUpsellRules=docs[13].docs.map(d=>({id:d.id,...d.data()}));
+    const tenantReviews=docs[14].docs.map(d=>normalizeTenantReview(d.id,d.data())).filter(r=>r.status==='approved'||r.approved===true);
+    const tenantCoupons=docs[15].docs.map(d=>({id:d.id,...d.data()}));
 
     cfg={...cfg,...template,
       logoUrl:geral.logoUrl||template.logoUrl||cfg.logoUrl,
       faviconUrl:geral.faviconUrl||template.faviconUrl||cfg.faviconUrl,
       businessName:geral.businessName||geral.nomeFantasia||template.businessName||cfg.businessName,
       siteUrl:dominio.siteUrl||dominio.publicUrl||template.siteUrl||cfg.siteUrl,
-      paymentMethods:pagamentos.paymentMethods||template.paymentMethods||cfg.paymentMethods,
+      paymentMethods:normalizeTenantPayments(pagamentos.paymentMethods||template.paymentMethods||cfg.paymentMethods),
       pickupAddress:endereco.pickupAddress||endereco.addressLine||template.pickupAddress||cfg.pickupAddress,
       pickupArea:endereco.pickupArea||template.pickupArea||cfg.pickupArea,
       gaId:integracoes.gaId||integracoes.ga4Id||template.gaId||cfg.gaId,
@@ -2282,11 +2291,16 @@ async function loadTenantPreviewData(){
       pixelId:integracoes.pixelId||integracoes.metaPixelId||template.pixelId||cfg.pixelId,
       seoTitle:seo.title||cfg.seoTitle,
       seoDesc:seo.description||cfg.seoDesc,
+      manualClosed:operacao.isOpen===false,
+      closedMessage:operacao.closedMessage||template.closedMessage||cfg.closedMessage,
+      prepTime:Number(operacao.prepTime||operacao.preparationTime||template.prepTime||cfg.prepTime||45),
+      hours:normalizeTenantHours(horarios,template.hours||cfg.hours),
+      deliveryZones:normalizeTenantZones(zonas,template.deliveryZones||cfg.deliveryZones),
       categories:tenantCats.length?tenantCats:(template.categories||[]),
       coupons:tenantCoupons.length?tenantCoupons:(template.coupons||[])
     };
     products=tenantProducts;
-    upsells=tenantUpsells;
+    upsells=tenantUpsells.length?tenantUpsells:tenantUpsellRules;
     window.__TENANT_REVIEWS=tenantReviews;
     CATS=computeCats();
     Object.keys(quantities).forEach(k=>delete quantities[k]);
@@ -2308,6 +2322,39 @@ function normalizeTenantProduct(id,p){
     category:p.category||p.categoryId||'menu',
     price:+(+(p.price??0))||0
   };
+}
+function normalizeTenantHours(horarios,fallback){
+  const hasDays=horarios&&Object.keys(horarios).some(k=>/^day\d$/.test(k));
+  if(!hasDays)return fallback||DEFAULT_CFG.hours;
+  const out={};
+  for(let i=0;i<7;i++){
+    const h=horarios['day'+i]||{};
+    out[i]={enabled:!h.closed,open:h.from||'11:00',close:h.to||'22:00',enabled2:false,open2:'',close2:''};
+  }
+  return out;
+}
+function normalizeTenantZones(zonas,fallback){
+  const list=zonas&&Array.isArray(zonas.list)?zonas.list:[];
+  if(!list.length)return fallback||[];
+  return list.map(z=>({
+    postal:z.postal||z.postalCode||z.zip||'',
+    name:z.name||'',
+    fee:Number(z.fee||0),
+    minOrder:Number(z.minOrder||0)
+  })).filter(z=>z.postal&&z.name);
+}
+function normalizeTenantReview(id,r){
+  return {
+    id,
+    ...r,
+    name:r.name||r.customerName||'Cliente',
+    stars:Number(r.stars||r.rating||0),
+    status:r.status||(r.approved?'approved':r.rejected?'rejected':'pending')
+  };
+}
+function normalizeTenantPayments(methods){
+  const labels={cash:'Efectivo',card:'Tarjeta',mbway:'MB WAY',bizum:'Bizum'};
+  return (methods||[]).map(m=>labels[m]||m).filter(Boolean);
 }
 
 /* ─ State ─ */
