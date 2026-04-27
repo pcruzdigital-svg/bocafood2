@@ -13,14 +13,16 @@ Modules.Catalogo = (function () {
   var _tags = [];
   var _editingId = null;
 
-  // Change J: Remove emojis from tab labels
   var TABS = [
     { key: 'produtos', label: 'Produtos' },
-    { key: 'categorias', label: 'Categorias' },
-    { key: 'produtos_prontos', label: 'Produtos Prontos' },
-    { key: 'variantes', label: 'Variantes' },
+    { section: 'Criação' },
+    { key: 'fichas', label: 'Receitas' },
+    { key: 'produtos_prontos', label: 'Produto Pronto' },
     { key: 'insumos', label: 'Insumos' },
-    { key: 'fichas', label: 'Fichas Técnicas' },
+    { section: 'Configuração' },
+    { key: 'categorias', label: 'Categorias' },
+    { key: 'variantes', label: 'Variantes' },
+    { key: 'extras', label: 'Extras' },
     { key: 'tags', label: 'Tags' }
   ];
 
@@ -42,6 +44,9 @@ Modules.Catalogo = (function () {
   function _renderTabs() {
     var el = document.getElementById('catalogo-tabs');
     el.innerHTML = TABS.map(function (t) {
+      if (t.section) {
+        return '<span style="align-self:center;margin:0 8px 0 18px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:#B9AAA6;">' + t.section + '</span>';
+      }
       var active = t.key === _activeSub;
       return '<button data-key="' + t.key + '" onclick="Modules.Catalogo._switchSub(\'' + t.key + '\')" style="padding:12px 18px;border:none;background:transparent;font-size:13px;font-weight:700;cursor:pointer;border-bottom:3px solid ' + (active ? '#C4362A' : 'transparent') + ';color:' + (active ? '#C4362A' : '#8A7E7C') + ';font-family:inherit;transition:all .15s;white-space:nowrap;">' + t.label + '</button>';
     }).join('');
@@ -61,6 +66,7 @@ Modules.Catalogo = (function () {
     else if (key === 'categorias') _renderCategorias();
     else if (key === 'produtos_prontos') _renderProdutosProntos();
     else if (key === 'variantes') _renderVariantes();
+    else if (key === 'extras') _renderVariantes('extras');
     else if (key === 'insumos') _renderInsumos();
     else if (key === 'fichas') _renderFichas();
     else if (key === 'tags') _renderTagsTab();
@@ -150,7 +156,7 @@ Modules.Catalogo = (function () {
       '<div style="width:60px;height:60px;border-radius:10px;background:#F2EDED;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;">' + imgHtml + '</div>' +
       '<div style="flex:1;min-width:0;">' +
       '<div style="font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + _esc(p.name) + '</div>' +
-      '<div style="font-size:11px;color:#8A7E7C;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + _esc(p.description) + '</div>' +
+      '<div style="font-size:11px;color:#8A7E7C;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + _esc(p.shortDesc || p.description) + '</div>' +
       '<div style="display:flex;align-items:center;gap:6px;margin-top:5px;flex-wrap:wrap;">' +
       '<span style="font-size:14px;font-weight:800;color:#C4362A;">' + UI.fmt(p.price || 0) + '</span>' +
       (cat ? UI.badge(cat.name, 'blue') : '') +
@@ -236,12 +242,12 @@ Modules.Catalogo = (function () {
       imgPreview = '<img id="pm-img-preview" style="max-width:100%;max-height:120px;border-radius:9px;margin-top:8px;display:none;">';
     }
 
-    // Menu composition items
-    var menuItems = p.menuItems || [];
-    var menuItemsHtml = menuItems.map(function (item, i) {
-      return _menuItemRowHtml(i, item);
+    // Menu choice groups
+    var menuGroups = _normalizeMenuGroups(p);
+    var menuGroupsHtml = menuGroups.map(function (group, i) {
+      return _menuGroupRowHtml(i, group);
     }).join('');
-    window._pmMenuItemCount = menuItems.length;
+    window._pmMenuGroupCount = menuGroups.length;
 
     var body = '<div>' +
       // Name and price
@@ -251,9 +257,12 @@ Modules.Catalogo = (function () {
       '<div><label style="font-size:11px;font-weight:700;color:#8A7E7C;display:block;margin-bottom:4px;">Preco (€) *</label>' +
       '<input id="pm-price" type="number" step="0.01" value="' + (p.price || '') + '" style="width:100%;padding:10px;border:1.5px solid #D4C8C6;border-radius:9px;font-size:14px;font-family:inherit;outline:none;"></div>' +
       '</div>' +
-      // Description
-      '<div style="margin-bottom:12px;"><label style="font-size:11px;font-weight:700;color:#8A7E7C;display:block;margin-bottom:4px;">Descricao</label>' +
-      '<textarea id="pm-desc" oninput="Modules.Catalogo._onProductDescChange()" style="width:100%;padding:10px;border:1.5px solid #D4C8C6;border-radius:9px;font-size:14px;font-family:inherit;outline:none;min-height:60px;resize:vertical;">' + _esc(p.description || '') + '</textarea></div>' +
+      '<div style="margin-bottom:12px;"><label style="font-size:11px;font-weight:700;color:#8A7E7C;display:block;margin-bottom:4px;">Microcopy</label>' +
+      '<input id="pm-microcopy" type="text" value="' + _esc(p.microcopy || '') + '" placeholder="Ex: Crocante por fora, recheio que surpreende" style="width:100%;padding:10px;border:1.5px solid #D4C8C6;border-radius:9px;font-size:14px;font-family:inherit;outline:none;"></div>' +
+      '<div style="margin-bottom:12px;"><label style="font-size:11px;font-weight:700;color:#8A7E7C;display:block;margin-bottom:4px;">Descricao curta</label>' +
+      '<textarea id="pm-short-desc" oninput="Modules.Catalogo._onProductDescChange()" style="width:100%;padding:10px;border:1.5px solid #D4C8C6;border-radius:9px;font-size:14px;font-family:inherit;outline:none;min-height:54px;resize:vertical;">' + _esc(p.shortDesc || p.description || '') + '</textarea></div>' +
+      '<div style="margin-bottom:12px;"><label style="font-size:11px;font-weight:700;color:#8A7E7C;display:block;margin-bottom:4px;">Descricao completa</label>' +
+      '<textarea id="pm-full-desc" style="width:100%;padding:10px;border:1.5px solid #D4C8C6;border-radius:9px;font-size:14px;font-family:inherit;outline:none;min-height:90px;resize:vertical;">' + _esc(p.fullDesc || p.seoDescription || p.description || '') + '</textarea></div>' +
 
       // Change C: Tags section — select from registered tags
       '<div style="margin-bottom:12px;padding:12px;background:#F9F7F7;border-radius:10px;">' +
@@ -295,7 +304,7 @@ Modules.Catalogo = (function () {
       '<input type="radio" name="pm-unico-src" id="pm-unico-pronto" value="produto_pronto"' + (unicoSubPronto ? ' checked' : '') + ' onchange="Modules.Catalogo._onUnicoSrcChange()" style="accent-color:#C4362A;"> Selecionar produto pronto</label>' +
       '</div>' +
       '<div id="pm-unico-receita-panel" style="display:' + (unicoSubReceita ? 'block' : 'none') + ';">' +
-      '<label style="font-size:11px;font-weight:700;color:#8A7E7C;display:block;margin-bottom:4px;">Ficha Tecnica</label>' +
+      '<label style="font-size:11px;font-weight:700;color:#8A7E7C;display:block;margin-bottom:4px;">Receita</label>' +
       '<select id="pm-ficha-id" style="width:100%;padding:9px;border:1.5px solid #D4C8C6;border-radius:9px;font-size:13px;font-family:inherit;outline:none;">' +
       '<option value="">Selecionar receita...</option>' + fichaOptions + '</select></div>' +
       '<div id="pm-unico-pronto-panel" style="display:' + (unicoSubPronto ? 'block' : 'none') + ';">' +
@@ -306,9 +315,10 @@ Modules.Catalogo = (function () {
 
       // Menu panel
       '<div id="pm-panel-menu" style="display:' + (tipoMenu ? 'block' : 'none') + ';">' +
-      '<div style="font-size:11px;font-weight:700;color:#8A7E7C;margin-bottom:8px;">Composicao do menu</div>' +
-      '<div id="pm-menu-items">' + menuItemsHtml + '</div>' +
-      '<button type="button" onclick="Modules.Catalogo._addMenuItem()" style="width:100%;padding:9px;border-radius:9px;border:1.5px dashed #D4C8C6;background:transparent;font-size:13px;font-weight:600;cursor:pointer;color:#8A7E7C;font-family:inherit;margin-top:4px;">+ Adicionar item ao menu</button>' +
+      '<div style="font-size:11px;font-weight:700;color:#8A7E7C;margin-bottom:4px;">Grupos de escolha do menu</div>' +
+      '<p style="font-size:12px;color:#8A7E7C;line-height:1.35;margin:0 0 10px;">Crie grupos como “Sabor”, “Bebida” ou “Acompanhamento”. O cliente escolhe a quantidade definida em cada grupo.</p>' +
+      '<div id="pm-menu-groups">' + menuGroupsHtml + '</div>' +
+      '<button type="button" onclick="Modules.Catalogo._addMenuGroup()" style="width:100%;padding:9px;border-radius:9px;border:1.5px dashed #D4C8C6;background:transparent;font-size:13px;font-weight:600;cursor:pointer;color:#8A7E7C;font-family:inherit;margin-top:4px;">+ Adicionar grupo ao menu</button>' +
       '</div>' +
       '</div>' +
 
@@ -359,7 +369,7 @@ Modules.Catalogo = (function () {
 
     // Init menu sortable
     setTimeout(function () {
-      var menuListEl = document.getElementById('pm-menu-items');
+      var menuListEl = document.getElementById('pm-menu-groups');
       if (menuListEl) {
         makeSortable(menuListEl, function () {}); // order tracked on save
       }
@@ -368,12 +378,56 @@ Modules.Catalogo = (function () {
 
   function _normalizeProduct(p) {
     p = Object.assign({}, p || {});
-    p.description = p.description || p.desc || p.shortDesc || '';
+    p.shortDesc = p.shortDesc || p.description || p.desc || '';
+    p.fullDesc = p.fullDesc || p.fullDescription || p.seoDescription || p.seoDesc || p.shortDesc || '';
+    p.description = p.shortDesc;
     p.imageUrl = p.imageUrl || p.img || '';
     p.categoryId = p.categoryId || p.category || '';
-    p.seoDescription = p.seoDescription || p.seoDesc || p.fullDesc || p.description || '';
+    p.seoDescription = p.seoDescription || p.seoDesc || p.fullDesc || p.shortDesc || '';
     p.type = p.type || (p.category === 'menu' ? 'menu' : 'unico');
     return p;
+  }
+
+  function _labelForMenuRef(ref) {
+    if (!ref) return '';
+    var parts = String(ref).split(':');
+    var type = parts[0];
+    var id = parts.slice(1).join(':');
+    if (type === 'ficha') {
+      var ficha = _fichas.find(function (f) { return f.id === id; });
+      return ficha ? ficha.name : id;
+    }
+    if (type === 'pronto') {
+      var pronto = _produtosProntos.find(function (pp) { return pp.id === id; });
+      return pronto ? pronto.name : id;
+    }
+    return id || ref;
+  }
+
+  function _normalizeMenuGroups(p) {
+    if (Array.isArray(p.menuChoiceGroups) && p.menuChoiceGroups.length) {
+      return p.menuChoiceGroups.map(function (g) {
+        return {
+          title: g.title || g.name || 'Escolha',
+          min: parseInt(g.min || g.qty || 1, 10) || 1,
+          max: parseInt(g.max || g.qty || g.min || 1, 10) || 1,
+          options: (g.options || []).map(function (o) {
+            var ref = o.ref || o.value || '';
+            return { ref: ref, label: o.label || _labelForMenuRef(ref), priceExtra: parseFloat(o.priceExtra || 0) || 0 };
+          }).filter(function (o) { return !!o.ref; })
+        };
+      });
+    }
+    return (p.menuItems || []).map(function (item, i) {
+      var ref = item.ref || '';
+      var qty = parseInt(item.qty || 1, 10) || 1;
+      return {
+        title: 'Grupo ' + (i + 1),
+        min: qty,
+        max: qty,
+        options: ref ? [{ ref: ref, label: _labelForMenuRef(ref), priceExtra: 0 }] : []
+      };
+    });
   }
 
   // Change E: SEO auto-update tracking
@@ -400,7 +454,7 @@ Modules.Catalogo = (function () {
   }
 
   function _onProductDescChange() {
-    var desc = (document.getElementById('pm-desc') || {}).value || '';
+    var desc = (document.getElementById('pm-short-desc') || {}).value || '';
     window._pmSeoEdited = window._pmSeoEdited || {};
     if (!window._pmSeoEdited['desc']) {
       var el = document.getElementById('pm-seo-desc');
@@ -427,37 +481,124 @@ Modules.Catalogo = (function () {
     if (pp) pp.style.display = isReceita ? 'none' : 'block';
   }
 
-  // Change B: Menu item row
-  function _menuItemRowHtml(idx, item) {
-    item = item || {};
-    var fichaOptions = _fichas.map(function (f) {
-      return '<option value="ficha:' + f.id + '"' + (item.ref === 'ficha:' + f.id ? ' selected' : '') + '>Receita: ' + _esc(f.name) + '</option>';
-    }).join('');
-    var prontoOptions = _produtosProntos.map(function (pp) {
-      return '<option value="pronto:' + pp.id + '"' + (item.ref === 'pronto:' + pp.id ? ' selected' : '') + '>Pronto: ' + _esc(pp.name) + '</option>';
-    }).join('');
+  function _menuOptionPool() {
+    var rows = [];
+    _fichas.forEach(function (f) { rows.push({ ref: 'ficha:' + f.id, label: 'Receita: ' + f.name }); });
+    _produtosProntos.forEach(function (pp) { rows.push({ ref: 'pronto:' + pp.id, label: 'Pronto: ' + pp.name }); });
+    return rows;
+  }
 
-    return '<div draggable="true" data-id="menu-item-' + idx + '" id="pm-menu-item-' + idx + '" style="display:grid;grid-template-columns:24px 1fr 90px 32px;gap:8px;margin-bottom:8px;align-items:center;">' +
-      '<span class="mi" style="color:#D4C8C6;font-size:16px;cursor:grab;">drag_indicator</span>' +
-      '<select data-menu-ref="' + idx + '" style="width:100%;padding:9px;border:1.5px solid #D4C8C6;border-radius:9px;font-size:12px;font-family:inherit;outline:none;">' +
-      '<option value="">Selecionar...</option>' + fichaOptions + prontoOptions + '</select>' +
-      '<input type="number" step="0.1" value="' + (item.qty || 1) + '" data-menu-qty="' + idx + '" placeholder="Qty" style="width:100%;padding:9px;border:1.5px solid #D4C8C6;border-radius:9px;font-size:13px;font-family:inherit;outline:none;">' +
-      '<button type="button" onclick="Modules.Catalogo._removeMenuItem(' + idx + ')" style="width:32px;height:38px;border-radius:8px;border:none;background:#FFF0EE;color:#C4362A;cursor:pointer;font-size:14px;">x</button>' +
+  function _menuSelectedOptionsHtml(idx, group) {
+    var options = group.options || [];
+    if (!options.length) return '<div data-menu-empty="' + idx + '" style="font-size:12px;color:#8A7E7C;padding:10px;border:1px dashed #D4C8C6;border-radius:9px;text-align:center;">Nenhuma opção adicionada neste grupo.</div>';
+    return options.map(function (o) {
+      return '<div data-menu-selected="' + idx + '" data-ref="' + _esc(o.ref) + '" data-label="' + _esc(o.label || _labelForMenuRef(o.ref)) + '" style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 10px;border:1px solid #F2EDED;border-radius:9px;background:#fff;margin-bottom:6px;">' +
+        '<span style="font-size:13px;font-weight:600;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + _esc(o.label || _labelForMenuRef(o.ref)) + '</span>' +
+        '<button type="button" onclick="Modules.Catalogo._removeMenuOption(' + idx + ', \'' + _esc(o.ref) + '\')" style="width:26px;height:26px;border-radius:7px;border:none;background:#FFF0EE;color:#C4362A;cursor:pointer;font-size:13px;flex-shrink:0;">x</button>' +
+        '</div>';
+    }).join('');
+  }
+
+  function _menuSearchOptionsHtml(idx, group) {
+    var selected = {};
+    (group.options || []).forEach(function (o) { selected[o.ref] = true; });
+    var rows = _menuOptionPool().filter(function (o) { return !selected[o.ref]; });
+    if (!rows.length) return '<div style="font-size:12px;color:#8A7E7C;padding:10px;">Nenhuma opção disponível para adicionar.</div>';
+    return rows.map(function (o) {
+      return '<button type="button" data-menu-candidate="' + idx + '" data-ref="' + _esc(o.ref) + '" data-label="' + _esc(o.label) + '" onclick="Modules.Catalogo._addMenuOption(' + idx + ', \'' + _esc(o.ref) + '\', \'' + _esc(o.label) + '\')" style="width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 10px;border:none;border-bottom:1px solid #F2EDED;background:#fff;text-align:left;cursor:pointer;font-family:inherit;">' +
+        '<span style="font-size:12px;font-weight:600;">' + _esc(o.label) + '</span><span style="font-size:11px;color:#C4362A;font-weight:800;">Adicionar</span></button>';
+    }).join('');
+  }
+
+  function _menuGroupRowHtml(idx, group) {
+    group = group || {};
+    var max = parseInt(group.max || group.qty || 1, 10) || 1;
+    var min = parseInt(group.min || max, 10) || max;
+    return '<div class="pm-menu-group" draggable="true" data-id="menu-group-' + idx + '" data-menu-group="' + idx + '" id="pm-menu-group-' + idx + '" style="background:#fff;border:1px solid #F2EDED;border-radius:12px;padding:12px;margin-bottom:10px;">' +
+      '<div style="display:grid;grid-template-columns:24px 1fr 86px 86px 32px;gap:8px;align-items:end;margin-bottom:10px;">' +
+      '<span class="mi" style="color:#D4C8C6;font-size:16px;cursor:grab;margin-bottom:10px;">drag_indicator</span>' +
+      '<label style="display:block;"><span style="font-size:10px;font-weight:700;color:#8A7E7C;text-transform:uppercase;">Nome do grupo</span><input data-menu-title="' + idx + '" value="' + _esc(group.title || 'Escolha') + '" placeholder="Ex: Sabor, bebida..." style="width:100%;padding:9px;border:1.5px solid #D4C8C6;border-radius:9px;font-size:13px;font-family:inherit;outline:none;"></label>' +
+      '<label style="display:block;"><span style="font-size:10px;font-weight:700;color:#8A7E7C;text-transform:uppercase;">Min</span><input data-menu-min="' + idx + '" type="number" min="0" step="1" value="' + min + '" style="width:100%;padding:9px;border:1.5px solid #D4C8C6;border-radius:9px;font-size:13px;font-family:inherit;outline:none;"></label>' +
+      '<label style="display:block;"><span style="font-size:10px;font-weight:700;color:#8A7E7C;text-transform:uppercase;">Max</span><input data-menu-max="' + idx + '" type="number" min="1" step="1" value="' + max + '" style="width:100%;padding:9px;border:1.5px solid #D4C8C6;border-radius:9px;font-size:13px;font-family:inherit;outline:none;"></label>' +
+      '<button type="button" onclick="Modules.Catalogo._removeMenuGroup(' + idx + ')" style="width:32px;height:38px;border-radius:8px;border:none;background:#FFF0EE;color:#C4362A;cursor:pointer;font-size:14px;">x</button>' +
+      '</div>' +
+      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">' +
+      '<div>' +
+      '<div style="font-size:10px;font-weight:700;color:#8A7E7C;text-transform:uppercase;margin-bottom:5px;">Opções adicionadas</div>' +
+      '<div id="pm-menu-selected-' + idx + '" style="max-height:170px;overflow:auto;padding:8px;border:1px solid #F2EDED;border-radius:9px;background:#FCFAFA;">' + _menuSelectedOptionsHtml(idx, group) + '</div>' +
+      '</div>' +
+      '<div>' +
+      '<div style="font-size:10px;font-weight:700;color:#8A7E7C;text-transform:uppercase;margin-bottom:5px;">Pesquisar e adicionar</div>' +
+      '<input data-menu-search="' + idx + '" oninput="Modules.Catalogo._filterMenuOptions(' + idx + ')" placeholder="Buscar receita ou produto..." style="width:100%;padding:9px;border:1.5px solid #D4C8C6;border-radius:9px;font-size:12px;font-family:inherit;outline:none;margin-bottom:6px;">' +
+      '<div id="pm-menu-candidates-' + idx + '" style="max-height:170px;overflow:auto;border:1px solid #F2EDED;border-radius:9px;background:#fff;">' + _menuSearchOptionsHtml(idx, group) + '</div>' +
+      '</div>' +
+      '</div>' +
       '</div>';
   }
 
-  function _addMenuItem() {
-    var container = document.getElementById('pm-menu-items');
+  function _addMenuOption(idx, ref, label) {
+    var selectedBox = document.getElementById('pm-menu-selected-' + idx);
+    var candidatesBox = document.getElementById('pm-menu-candidates-' + idx);
+    if (!selectedBox || !candidatesBox) return;
+    if (selectedBox.querySelector('[data-ref="' + ref.replace(/"/g, '\\"') + '"]')) return;
+    var empty = selectedBox.querySelector('[data-menu-empty]');
+    if (empty) empty.remove();
+    selectedBox.insertAdjacentHTML('beforeend',
+      '<div data-menu-selected="' + idx + '" data-ref="' + _esc(ref) + '" data-label="' + _esc(label) + '" style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 10px;border:1px solid #F2EDED;border-radius:9px;background:#fff;margin-bottom:6px;">' +
+      '<span style="font-size:13px;font-weight:600;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + _esc(label) + '</span>' +
+      '<button type="button" onclick="Modules.Catalogo._removeMenuOption(' + idx + ', \'' + _esc(ref) + '\')" style="width:26px;height:26px;border-radius:7px;border:none;background:#FFF0EE;color:#C4362A;cursor:pointer;font-size:13px;flex-shrink:0;">x</button>' +
+      '</div>');
+    var candidate = candidatesBox.querySelector('[data-ref="' + ref.replace(/"/g, '\\"') + '"]');
+    if (candidate) candidate.remove();
+  }
+
+  function _removeMenuOption(idx, ref) {
+    var selectedBox = document.getElementById('pm-menu-selected-' + idx);
+    if (!selectedBox) return;
+    var row = selectedBox.querySelector('[data-ref="' + ref.replace(/"/g, '\\"') + '"]');
+    if (row) row.remove();
+    if (!selectedBox.querySelector('[data-menu-selected]')) {
+      selectedBox.innerHTML = '<div data-menu-empty="' + idx + '" style="font-size:12px;color:#8A7E7C;padding:10px;border:1px dashed #D4C8C6;border-radius:9px;text-align:center;">Nenhuma opção adicionada neste grupo.</div>';
+    }
+    _refreshMenuCandidates(idx);
+  }
+
+  function _filterMenuOptions(idx) {
+    var input = document.querySelector('[data-menu-search="' + idx + '"]');
+    var q = ((input && input.value) || '').toLowerCase();
+    var box = document.getElementById('pm-menu-candidates-' + idx);
+    if (!box) return;
+    box.querySelectorAll('[data-menu-candidate]').forEach(function (row) {
+      var label = (row.dataset.label || '').toLowerCase();
+      row.style.display = label.indexOf(q) >= 0 ? 'flex' : 'none';
+    });
+  }
+
+  function _refreshMenuCandidates(idx) {
+    var box = document.getElementById('pm-menu-candidates-' + idx);
+    var selectedBox = document.getElementById('pm-menu-selected-' + idx);
+    if (!box || !selectedBox) return;
+    var selected = {};
+    selectedBox.querySelectorAll('[data-menu-selected]').forEach(function (row) { selected[row.dataset.ref] = true; });
+    var rows = _menuOptionPool().filter(function (o) { return !selected[o.ref]; });
+    box.innerHTML = rows.map(function (o) {
+      return '<button type="button" data-menu-candidate="' + idx + '" data-ref="' + _esc(o.ref) + '" data-label="' + _esc(o.label) + '" onclick="Modules.Catalogo._addMenuOption(' + idx + ', \'' + _esc(o.ref) + '\', \'' + _esc(o.label) + '\')" style="width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 10px;border:none;border-bottom:1px solid #F2EDED;background:#fff;text-align:left;cursor:pointer;font-family:inherit;">' +
+        '<span style="font-size:12px;font-weight:600;">' + _esc(o.label) + '</span><span style="font-size:11px;color:#C4362A;font-weight:800;">Adicionar</span></button>';
+    }).join('') || '<div style="font-size:12px;color:#8A7E7C;padding:10px;">Nenhuma opção disponível para adicionar.</div>';
+    _filterMenuOptions(idx);
+  }
+
+  function _addMenuGroup() {
+    var container = document.getElementById('pm-menu-groups');
     if (!container) return;
-    var idx = window._pmMenuItemCount || 0;
-    window._pmMenuItemCount = idx + 1;
-    container.insertAdjacentHTML('beforeend', _menuItemRowHtml(idx, {}));
-    // re-init sortable
+    var idx = window._pmMenuGroupCount || 0;
+    window._pmMenuGroupCount = idx + 1;
+    container.insertAdjacentHTML('beforeend', _menuGroupRowHtml(idx, { title: 'Escolha', min: 1, max: 1, options: [] }));
     makeSortable(container, function () {});
   }
 
-  function _removeMenuItem(idx) {
-    var el = document.getElementById('pm-menu-item-' + idx);
+  function _removeMenuGroup(idx) {
+    var el = document.getElementById('pm-menu-group-' + idx);
     if (el) el.remove();
   }
 
@@ -508,17 +649,29 @@ Modules.Catalogo = (function () {
       variantGroupIds.push(cb.dataset.vgid);
     });
 
-    // Change B: menu items
+    // Change B: menu choice groups
+    var menuChoiceGroups = [];
     var menuItems = [];
-    var menuContainer = document.getElementById('pm-menu-items');
+    var menuContainer = document.getElementById('pm-menu-groups');
     if (menuContainer && tipo === 'menu') {
-      menuContainer.querySelectorAll('[data-menu-ref]').forEach(function (sel) {
-        var idx = sel.dataset.menuRef;
-        var ref = sel.value;
-        if (!ref) return;
-        var qtyEl = menuContainer.querySelector('[data-menu-qty="' + idx + '"]');
-        var qty = parseFloat(qtyEl ? qtyEl.value : 1) || 1;
-        menuItems.push({ ref: ref, qty: qty });
+      menuContainer.querySelectorAll('.pm-menu-group').forEach(function (groupEl) {
+        var idx = groupEl.dataset.menuGroup;
+        var titleEl = groupEl.querySelector('[data-menu-title="' + idx + '"]');
+        var minEl = groupEl.querySelector('[data-menu-min="' + idx + '"]');
+        var maxEl = groupEl.querySelector('[data-menu-max="' + idx + '"]');
+        var max = parseInt(maxEl ? maxEl.value : 1, 10) || 1;
+        var min = parseInt(minEl ? minEl.value : max, 10);
+        if (min < 0) min = 0;
+        if (max < 1) max = 1;
+        if (min > max) min = max;
+        var options = [];
+        groupEl.querySelectorAll('[data-menu-selected="' + idx + '"]').forEach(function (opt) {
+          options.push({ ref: opt.dataset.ref, label: opt.dataset.label || opt.dataset.ref, priceExtra: 0 });
+        });
+        if (options.length) {
+          menuChoiceGroups.push({ title: (titleEl ? titleEl.value : '') || 'Escolha', min: min, max: max, options: options });
+          if (options.length === 1) menuItems.push({ ref: options[0].ref, qty: max });
+        }
       });
     }
 
@@ -532,7 +685,10 @@ Modules.Catalogo = (function () {
     var data = {
       name: name,
       price: parseFloat((document.getElementById('pm-price') || {}).value) || 0,
-      description: (document.getElementById('pm-desc') || {}).value || '',
+      microcopy: (document.getElementById('pm-microcopy') || {}).value || '',
+      shortDesc: (document.getElementById('pm-short-desc') || {}).value || '',
+      fullDesc: (document.getElementById('pm-full-desc') || {}).value || '',
+      description: (document.getElementById('pm-short-desc') || {}).value || '',
       categoryId: (document.getElementById('pm-cat') || {}).value || '',
       internalNote: (document.getElementById('pm-note') || {}).value || '',
       menuVisible: window._pmVisible !== false,
@@ -542,6 +698,7 @@ Modules.Catalogo = (function () {
       fichaId: (tipo === 'unico' && unicoSrc === 'receita') ? ((document.getElementById('pm-ficha-id') || {}).value || '') : '',
       produtoProntoId: (tipo === 'unico' && unicoSrc === 'produto_pronto') ? ((document.getElementById('pm-pronto-id') || {}).value || '') : '',
       menuItems: tipo === 'menu' ? menuItems : [],
+      menuChoiceGroups: tipo === 'menu' ? menuChoiceGroups : [],
       // Change C
       tags: tags,
       // Change D
@@ -1266,7 +1423,8 @@ Modules.Catalogo = (function () {
     _openProductModal: _openProductModal, _toggleVis: _toggleVis, _saveProduct: _saveProduct, _deleteProduct: _deleteProduct,
     _onProductNameChange: _onProductNameChange, _onProductDescChange: _onProductDescChange,
     _seoEdited: _seoEdited, _onTipoChange: _onTipoChange, _onUnicoSrcChange: _onUnicoSrcChange,
-    _addMenuItem: _addMenuItem, _removeMenuItem: _removeMenuItem,
+    _addMenuGroup: _addMenuGroup, _removeMenuGroup: _removeMenuGroup,
+    _addMenuOption: _addMenuOption, _removeMenuOption: _removeMenuOption, _filterMenuOptions: _filterMenuOptions,
     _onImgFileChange: _onImgFileChange,
     _onProntoImgChange: _onProntoImgChange, _onFichaImgChange: _onFichaImgChange,
     _openCatModal: _openCatModal, _selectCatColor: _selectCatColor, _saveCat: _saveCat, _deleteCat: _deleteCat,
