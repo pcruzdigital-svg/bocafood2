@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seguimiento de pedido | Bocado Brasil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@700;800;900&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--red:#C4362A;--dark:#1A1110;--gray-text:#6B5F5D;--gray-light:#F2EDED;--gray-mid:#D9CFCD;--white:#FFFFFF;--radius:16px}
+body{font-family:'Work Sans',sans-serif;background:var(--gray-light);min-height:100vh;color:var(--dark)}
+header{background:var(--white);border-bottom:1px solid var(--gray-mid);padding:14px 20px;text-align:center}
+.logo{font-family:'League Spartan',sans-serif;font-size:20px;font-weight:800;color:var(--red)}
+.wrap{max-width:480px;margin:0 auto;padding:20px 16px 40px}
+.track-card{background:var(--white);border-radius:20px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.08);margin-bottom:16px}
+.track-header{background:var(--red);padding:20px;color:#fff;text-align:center}
+.track-id{font-size:11px;font-weight:700;opacity:.75;letter-spacing:.5px;text-transform:uppercase;margin-bottom:4px}
+.track-name{font-family:'League Spartan',sans-serif;font-size:22px;font-weight:800;margin-bottom:4px}
+.track-slot{font-size:13px;opacity:.85}
+.track-body{padding:20px}
+/* Status timeline */
+.timeline{display:flex;flex-direction:column;gap:0}
+.tl-step{display:flex;gap:14px;position:relative}
+.tl-step:not(:last-child)::before{content:'';position:absolute;left:15px;top:32px;width:2px;height:calc(100% - 8px);background:var(--gray-light)}
+.tl-icon{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;border:2px solid var(--gray-mid);background:var(--white);z-index:1;transition:all .3s}
+.tl-icon.done{background:var(--red);border-color:var(--red);color:#fff}
+.tl-icon.active{background:#FFF5F5;border-color:var(--red);color:var(--red);animation:tl-pulse 1.5s ease-in-out infinite}
+@keyframes tl-pulse{0%,100%{box-shadow:0 0 0 0 rgba(196,54,42,.3)}50%{box-shadow:0 0 0 6px rgba(196,54,42,0)}}
+.tl-content{padding:4px 0 20px;flex:1}
+.tl-label{font-size:14px;font-weight:700;color:var(--dark)}
+.tl-label.active{color:var(--red)}
+.tl-label.pending{color:var(--gray-mid)}
+.tl-time{font-size:11px;color:var(--gray-text);margin-top:2px}
+/* Order items */
+.items-card{background:var(--white);border-radius:16px;padding:16px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.items-title{font-size:11px;font-weight:700;color:var(--gray-text);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px}
+.order-item{display:flex;justify-content:space-between;align-items:baseline;padding:6px 0;border-bottom:1px solid var(--gray-light);font-size:14px}
+.order-item:last-child{border-bottom:none}
+.order-item-name{color:var(--dark);font-weight:500}
+.order-item-qty{color:var(--gray-text);font-size:12px;margin-right:6px}
+.order-item-price{font-weight:700;color:var(--dark);white-space:nowrap}
+.order-total{display:flex;justify-content:space-between;margin-top:10px;padding-top:10px;border-top:2px solid var(--gray-light)}
+.order-total-label{font-size:14px;font-weight:700}
+.order-total-val{font-family:'League Spartan',sans-serif;font-size:18px;font-weight:800;color:var(--red)}
+/* Delivery info */
+.info-pill{display:flex;align-items:center;gap:8px;background:var(--gray-light);border-radius:12px;padding:10px 14px;margin-bottom:8px;font-size:13px;font-weight:500}
+.info-pill .material-symbols-outlined{font-size:18px;color:var(--red)}
+/* Cancelled */
+.cancelled-banner{background:#FEF2F2;border:1.5px solid #FECACA;border-radius:12px;padding:16px;text-align:center;color:#991B1B;font-weight:600;margin-bottom:16px}
+/* Not found */
+.not-found{text-align:center;padding:60px 20px}
+.not-found-icon{font-size:48px;margin-bottom:12px}
+.not-found-title{font-family:'League Spartan',sans-serif;font-size:20px;font-weight:800;margin-bottom:6px}
+.not-found-sub{font-size:14px;color:var(--gray-text)}
+/* Loading */
+.loading{text-align:center;padding:60px 20px;color:var(--gray-text)}
+.spin{width:36px;height:36px;border:3px solid var(--gray-light);border-top-color:var(--red);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 14px}
+@keyframes spin{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">🇧🇷 Bocado Brasil</div>
+</header>
+
+<div class="wrap" id="wrap">
+  <div class="loading">
+    <div class="spin"></div>
+    <div>Buscando tu pedido...</div>
+  </div>
+</div>
+
+<script>
+const BB_FB_CFG={apiKey:'AIzaSyAZk2mEPXR-VQOOEJWfcdhqoJOhHWjzda4',authDomain:'bocado-brasil.firebaseapp.com',projectId:'bocado-brasil',storageBucket:'bocado-brasil.firebasestorage.app',messagingSenderId:'1083383234261',appId:'1:1083383234261:web:b73a9e9f7df73233d6ec5c'};
+firebase.initializeApp(BB_FB_CFG);
+const db=firebase.firestore();
+
+const ORDER_ID=new URLSearchParams(window.location.search).get('id');
+const wrap=document.getElementById('wrap');
+const fmt=v=>'€'+(+v||0).toFixed(2).replace('.',',');
+
+const STATUSES=[
+  {key:'Pendiente',       label:'Pedido recibido',        icon:'receipt'},
+  {key:'Confirmado',      label:'Confirmado',              icon:'check_circle'},
+  {key:'En preparación',  label:'En preparación',          icon:'soup_kitchen'},
+  {key:'En camino',       label:'En camino',               icon:'local_shipping'},
+  {key:'Listo para recoger',label:'Listo para recoger',   icon:'storefront'},
+  {key:'Entregado',       label:'Entregado',               icon:'done_all'},
+];
+
+function statusIndex(s){
+  const i=STATUSES.findIndex(x=>x.key===s);
+  return i>=0?i:0;
+}
+
+function render(order){
+  if(!order){
+    wrap.innerHTML=`<div class="not-found"><div class="not-found-icon">🔍</div><div class="not-found-title">Pedido no encontrado</div><div class="not-found-sub">Comprueba el enlace o contáctanos por WhatsApp.</div></div>`;
+    return;
+  }
+  const isCancelled=order.status==='Cancelado';
+  const currentIdx=isCancelled?-1:statusIndex(order.status);
+  const ts=order.createdAt?.toDate?order.createdAt.toDate():new Date();
+  const timeStr=ts.toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long'})+' · '+ts.toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit'});
+
+  // Determine which statuses to show based on type
+  const isDelivery=order.type==='delivery';
+  const relevantStatuses=STATUSES.filter(s=>{
+    if(s.key==='En camino'&&!isDelivery)return false;
+    if(s.key==='Listo para recoger'&&isDelivery)return false;
+    return true;
+  });
+
+  // Timeline HTML
+  const tlHtml=relevantStatuses.map((s,i)=>{
+    const sIdx=statusIndex(s.key);
+    const done=!isCancelled&&currentIdx>sIdx;
+    const active=!isCancelled&&currentIdx===sIdx;
+    const iconClass=done?'done':active?'active':'';
+    const labelClass=active?'active':!done&&!active?'pending':'';
+    return`<div class="tl-step">
+      <div class="tl-icon ${iconClass}"><span class="material-symbols-outlined" style="font-size:15px;font-variation-settings:'FILL' ${done||active?1:0}">${done?'check':s.icon}</span></div>
+      <div class="tl-content">
+        <div class="tl-label ${labelClass}">${s.label}</div>
+        ${active?`<div class="tl-time">Ahora mismo</div>`:done?`<div class="tl-time">✓</div>`:''}
+      </div>
+    </div>`;
+  }).join('');
+
+  // Items HTML
+  const itemsHtml=(order.items||[]).map(it=>`
+    <div class="order-item">
+      <div><span class="order-item-qty">${it.qty}×</span><span class="order-item-name">${it.name}${it.selections?' ('+it.selections+')':''}</span></div>
+      <div class="order-item-price">${fmt(it.total)}</div>
+    </div>`).join('');
+
+  wrap.innerHTML=`
+    ${isCancelled?'<div class="cancelled-banner">❌ Este pedido ha sido cancelado. Contáctanos para más información.</div>':''}
+    <div class="track-card">
+      <div class="track-header">
+        <div class="track-id">Pedido #${ORDER_ID.slice(0,8).toUpperCase()}</div>
+        <div class="track-name">${isCancelled?'❌ Cancelado':(STATUSES[currentIdx]?.label||order.status)}</div>
+        <div class="track-slot">${order.slotLabel||''}</div>
+      </div>
+      <div class="track-body">
+        <div class="timeline">${tlHtml}</div>
+      </div>
+    </div>
+
+    ${order.type==='delivery'?`
+    <div class="items-card">
+      <div class="info-pill"><span class="material-symbols-outlined">local_shipping</span> Envío a domicilio</div>
+      <div class="info-pill"><span class="material-symbols-outlined">location_on</span>${order.address||'—'}</div>
+    </div>`:`
+    <div class="items-card">
+      <div class="info-pill"><span class="material-symbols-outlined">storefront</span> Recogida en tienda</div>
+    </div>`}
+
+    <div class="items-card">
+      <div class="items-title">Tu pedido</div>
+      ${itemsHtml}
+      ${order.coupon?`<div style="font-size:12px;color:#1A9E5A;padding:6px 0">🎟️ Cupón ${order.coupon.code}: -${fmt(order.coupon.discount)}</div>`:''}
+      ${order.type==='delivery'&&order.deliveryFee?`<div class="order-item"><span>Envío</span><span class="order-item-price">${fmt(order.deliveryFee)}</span></div>`:''}
+      <div class="order-total">
+        <span class="order-total-label">Total</span>
+        <span class="order-total-val">${fmt(order.total)}</span>
+      </div>
+    </div>
+    <div style="text-align:center;font-size:12px;color:var(--gray-text);margin-top:8px">
+      Pedido realizado el ${timeStr}
+    </div>`;
+}
+
+if(!ORDER_ID){
+  wrap.innerHTML=`<div class="not-found"><div class="not-found-icon">⚠️</div><div class="not-found-title">Enlace inválido</div><div class="not-found-sub">No se encontró el ID del pedido en la URL.</div></div>`;
+}else{
+  // Real-time listener
+  db.collection('orders').doc(ORDER_ID).onSnapshot(snap=>{
+    render(snap.exists?{id:snap.id,...snap.data()}:null);
+  },err=>{
+    wrap.innerHTML=`<div class="not-found"><div class="not-found-icon">⚠️</div><div class="not-found-title">Error al cargar</div><div class="not-found-sub">${err.message}</div></div>`;
+  });
+}
+</script>
+</body>
+</html>
