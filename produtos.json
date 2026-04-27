@@ -1,0 +1,1516 @@
+[
+  {
+    "promo": null,
+    "codigo": "BB-02439",
+    "ofertaDoDia": false,
+    "flavors": [],
+    "extras": [],
+    "id": 1,
+    "name": "Menú 1 – Clásico",
+    "desc": "Pastel de feira media luna 20x12 + bebida fría",
+    "shortDesc": "Pastel de feira media luna 20x12 + bebida fría",
+    "fullDesc": "Pastel de feira media luna (20x12), recién hecho, dorado y crujiente, con relleno abundante que se nota en cada mordida.\nAcompañado de una bebida bien fría a tu elección.\nSimple, directo y difícil de olvidar.",
+    "price": 5.5,
+    "category": "menu",
+    "popular": false,
+    "emoji": "🥟",
+    "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/produtos/4_1776678107753.png",
+    "menuVisible": true,
+    "pairing": 12,
+    "addAlsoIds": [
+      1776590591958,
+      1776590702432
+    ],
+    "microcopy": "Crujiente por fuera, relleno que sorprende",
+    "badgeText": "",
+    "badgeColor": "",
+    "seoTitle": "Menú pastel de feira + guaraná | Comida brasileña auténtica",
+    "seoDesc": "Disfruta de un menú brasileño con pastel de feira crujiente, guaraná y salsa. Rápido, sabroso y auténtico.",
+    "seoKeywords": "pastel de feira, menú brasileño, comida brasileña, pastel brasileño, guaraná, street food Brasil",
+    "variants": [
+      {
+        "id": "vg_1776634671283",
+        "title": "Sabor de tu pastel de feira",
+        "maxPerUnit": 1,
+        "required": true,
+        "options": [
+          {
+            "name": "Carne",
+            "priceExtra": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/download_1776595158424.png"
+          },
+          {
+            "name": "Pollo",
+            "priceExtra": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/24310722-6e48-4889-b946-0d6b93f01e31_1776594039115.jpg"
+          },
+          {
+            "name": "Queso",
+            "priceExtra": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/990810f9242641a8e264ce996a78ed28_XL_1776594565133.jpg"
+          },
+          {
+            "name": "Calabresa",
+            "price": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/f5c7e1897edc5417eaf7f9b59c2fd8fb_1776594958914.jpg"
+          },
+          {
+            "name": "Bauru",
+            "price": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/5ecd0a6e-630b-4060-a64b-815c4e54d6c6_1776594119689.jpg"
+          },
+          {
+            "name": "Pizza",
+            "price": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/images_1776594692194.jpeg"
+          },
+          {
+            "name": "Carne con Queso",
+            "price": 1,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/115895438_1246750525658005_4436009483729_1776594190679.jpg"
+          },
+          {
+            "name": "Pollo con Queso",
+            "price": 1,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/05a86a5024d5ef849b4ae6f315a1a4e3_1776594259863.jpg"
+          },
+          {
+            "name": "Costilla",
+            "price": 1.5,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/6F513AE5-2595-4619-AB7B-1D012EEE1135_1776593982797.jpg"
+          },
+          {
+            "name": "Calabresa con Queso",
+            "price": 1,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/images_1776595039381.jpeg"
+          }
+        ],
+        "_libId": "vgl_1776632112860_vnlp"
+      },
+      {
+        "id": "vg_1776634677794",
+        "title": "Sabor de tu bebida",
+        "maxPerUnit": 1,
+        "required": true,
+        "options": [
+          {
+            "name": "Guaraná - 350ml",
+            "priceExtra": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/0b4dbec55ed48e8dba7c441719dc3c276bca5c32_1776591786704.jpeg"
+          },
+          {
+            "name": "Zumo de Maracuyá - 350ml",
+            "priceExtra": 1,
+            "price": 1,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/Design_sem_nome__1__1776592326994.png"
+          }
+        ],
+        "_libId": "vgl_1776632112860_jn1g"
+      }
+    ],
+    "badgeTextColor": "",
+    "productType": "combo"
+  },
+  {
+    "promo": null,
+    "codigo": "BB-02434",
+    "ofertaDoDia": false,
+    "flavors": [],
+    "extras": [],
+    "id": 3,
+    "name": "Menú 2 – Favorito",
+    "desc": "Pastel de feira media luna 20x12 + bebida fría + brigadeiro",
+    "shortDesc": "Pastel de feira media luna 20x12 + bebida fría + brigadeiro",
+    "fullDesc": "Pastel de feira media luna (20x12), recién hecho, dorado y crujiente, con relleno generoso que se siente en cada mordida.\nAcompañado de una bebida bien fría a tu elección y un brigadeiro cremoso que cierra perfecto.\nEquilibrio entre salado y dulce que engancha.",
+    "price": 6.5,
+    "category": "menu",
+    "popular": false,
+    "emoji": "🍽️",
+    "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/produtos/5_1776679231465.png",
+    "menuVisible": true,
+    "pairing": 7,
+    "addAlsoIds": [
+      1776590591958,
+      1776590702432
+    ],
+    "microcopy": "El que repiten sin pensarlo",
+    "badgeText": "Favorito",
+    "badgeColor": "#daae10",
+    "seoTitle": "Menú brasileño completo con pastel de feira y brigadeiro",
+    "seoDesc": "Menú completo con pastel de feira, dulce brasileño y bebida. Prueba lo mejor de Brasil en un solo pedido.",
+    "seoKeywords": "menú brasileño completo, pastel de feira, brigadeiro, comida brasileña, dulces brasileños",
+    "variants": [
+      {
+        "id": "vg_1776632782492",
+        "title": "Sabor de tu pastel de feira",
+        "maxPerUnit": 1,
+        "required": true,
+        "options": [
+          {
+            "name": "Carne",
+            "priceExtra": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/download_1776595158424.png"
+          },
+          {
+            "name": "Pollo",
+            "priceExtra": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/24310722-6e48-4889-b946-0d6b93f01e31_1776594039115.jpg"
+          },
+          {
+            "name": "Queso",
+            "priceExtra": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/990810f9242641a8e264ce996a78ed28_XL_1776594565133.jpg"
+          },
+          {
+            "name": "Calabresa",
+            "price": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/f5c7e1897edc5417eaf7f9b59c2fd8fb_1776594958914.jpg"
+          },
+          {
+            "name": "Bauru",
+            "price": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/5ecd0a6e-630b-4060-a64b-815c4e54d6c6_1776594119689.jpg"
+          },
+          {
+            "name": "Pizza",
+            "price": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/images_1776594692194.jpeg"
+          },
+          {
+            "name": "Carne con Queso",
+            "price": 1,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/115895438_1246750525658005_4436009483729_1776594190679.jpg"
+          },
+          {
+            "name": "Pollo con Queso",
+            "price": 1,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/05a86a5024d5ef849b4ae6f315a1a4e3_1776594259863.jpg"
+          },
+          {
+            "name": "Costilla",
+            "price": 1.5,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/6F513AE5-2595-4619-AB7B-1D012EEE1135_1776593982797.jpg"
+          },
+          {
+            "name": "Calabresa con Queso",
+            "price": 1,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/images_1776595039381.jpeg"
+          }
+        ],
+        "_libId": "vgl_1776632112860_vnlp"
+      },
+      {
+        "id": "vg_1776632841699",
+        "title": "Sabor de tu dulce",
+        "maxPerUnit": 1,
+        "required": true,
+        "options": [
+          {
+            "name": "Brigadeiro Chocolate - 20gr",
+            "priceExtra": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/Design_sem_nome__4__1776593010199.png"
+          },
+          {
+            "name": "Beijinho - 20gr",
+            "priceExtra": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/Design_sem_nome__2__1776592957677.png"
+          },
+          {
+            "name": "Brigadeiro Leche en Polvo - 20gr",
+            "price": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/Design_sem_nome__3__1776592948120.png"
+          }
+        ],
+        "_libId": "vgl_1776632112860_w6rc"
+      },
+      {
+        "id": "vg_1776632814108",
+        "title": "Sabor de tu bebida",
+        "maxPerUnit": 1,
+        "required": true,
+        "options": [
+          {
+            "name": "Guaraná - 350ml",
+            "priceExtra": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/0b4dbec55ed48e8dba7c441719dc3c276bca5c32_1776591786704.jpeg"
+          },
+          {
+            "name": "Zumo de Maracuyá - 350ml",
+            "priceExtra": 1,
+            "price": 1,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/Design_sem_nome__1__1776592326994.png"
+          }
+        ],
+        "_libId": "vgl_1776632112860_jn1g"
+      }
+    ],
+    "productType": "combo",
+    "badgeTextColor": "#fcfcfc"
+  },
+  {
+    "promo": null,
+    "codigo": "BB-02441",
+    "ofertaDoDia": false,
+    "flavors": [],
+    "extras": [],
+    "id": 1776680606807,
+    "name": "Menú 3 - De la casa",
+    "desc": "Pastel de feira media luna 20x12 + bebida fría + bizcocho de zanahoria",
+    "price": 9.5,
+    "emoji": "🍽️",
+    "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/produtos/Design_sem_nome__11__1776680759931.png",
+    "popular": false,
+    "menuVisible": true,
+    "category": "menu",
+    "pairing": 6,
+    "addAlsoIds": [
+      1776590591958,
+      1776590702432
+    ],
+    "variants": [
+      {
+        "id": "vg_1776635216952",
+        "title": "Sabor de tu pastel de feira",
+        "maxPerUnit": 1,
+        "required": true,
+        "options": [
+          {
+            "name": "Carne",
+            "priceExtra": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/download_1776595158424.png"
+          },
+          {
+            "name": "Pollo",
+            "priceExtra": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/24310722-6e48-4889-b946-0d6b93f01e31_1776594039115.jpg"
+          },
+          {
+            "name": "Queso",
+            "priceExtra": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/990810f9242641a8e264ce996a78ed28_XL_1776594565133.jpg"
+          },
+          {
+            "name": "Calabresa",
+            "price": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/f5c7e1897edc5417eaf7f9b59c2fd8fb_1776594958914.jpg"
+          },
+          {
+            "name": "Bauru",
+            "price": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/5ecd0a6e-630b-4060-a64b-815c4e54d6c6_1776594119689.jpg"
+          },
+          {
+            "name": "Pizza",
+            "price": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/images_1776594692194.jpeg"
+          },
+          {
+            "name": "Carne con Queso",
+            "price": 1,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/115895438_1246750525658005_4436009483729_1776594190679.jpg"
+          },
+          {
+            "name": "Pollo con Queso",
+            "price": 1,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/05a86a5024d5ef849b4ae6f315a1a4e3_1776594259863.jpg"
+          },
+          {
+            "name": "Costilla",
+            "price": 1.5,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/6F513AE5-2595-4619-AB7B-1D012EEE1135_1776593982797.jpg"
+          },
+          {
+            "name": "Calabresa con Queso",
+            "price": 1,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/images_1776595039381.jpeg"
+          }
+        ],
+        "_libId": "vgl_1776632112860_vnlp"
+      },
+      {
+        "id": "vg_1776635229378",
+        "title": "Sabor de tu bebida",
+        "maxPerUnit": 1,
+        "required": true,
+        "options": [
+          {
+            "name": "Guaraná - 350ml",
+            "priceExtra": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/0b4dbec55ed48e8dba7c441719dc3c276bca5c32_1776591786704.jpeg"
+          },
+          {
+            "name": "Zumo de Maracuyá - 350ml",
+            "priceExtra": 1,
+            "price": 1,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/Design_sem_nome__1__1776592326994.png"
+          }
+        ],
+        "_libId": "vgl_1776632112860_jn1g"
+      }
+    ],
+    "shortDesc": "Pastel de feira media luna 20x12 + bebida fría + bizcocho de zanahoria",
+    "fullDesc": "Pastel de feira media luna (20x12), dorado y crujiente, con relleno abundante que se siente en cada mordida.\nAcompañado de una bebida bien fría a tu elección y un bizcocho de zanahoria suave, húmedo y cubierto con chocolate, que remata perfecto.\nUna combinación casera que apetece y deja ganas de repetir.",
+    "seoTitle": "Menú De la casa en Pamplona | Pastel + bebida",
+    "seoDesc": "Pastel de feira media luna 20x12 + bebida fría + bizcocho de zanahoria con chocolate. Menú casero en Pamplona. Pide fácil.",
+    "seoKeywords": "pastel de feira pamplona, menú brasileño pamplona, comida casera pamplona, bizcocho zanahoria chocolate pamplona, comida brasileña pamplona",
+    "microcopy": "El toque casero que engancha",
+    "badgeText": "Favorito",
+    "badgeColor": "#daae10",
+    "badgeTextColor": "#fcfcfc",
+    "productType": "combo"
+  },
+  {
+    "promo": null,
+    "codigo": "BB-02441",
+    "ofertaDoDia": false,
+    "flavors": [],
+    "extras": [],
+    "id": 1776635241552,
+    "name": "Menú 4 – Mix",
+    "desc": "Pastel de feira media luna 20x12 + coxinha XL + bebida fría",
+    "price": 9.5,
+    "emoji": "🍽️",
+    "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/produtos/3_1776679244838.png",
+    "popular": false,
+    "menuVisible": true,
+    "category": "menu",
+    "pairing": 10,
+    "addAlsoIds": [
+      1776590591958,
+      1776590702432
+    ],
+    "variants": [
+      {
+        "id": "vg_1776635216952",
+        "title": "Sabor de tu pastel de feira",
+        "maxPerUnit": 1,
+        "required": true,
+        "options": [
+          {
+            "name": "Carne",
+            "priceExtra": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/download_1776595158424.png"
+          },
+          {
+            "name": "Pollo",
+            "priceExtra": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/24310722-6e48-4889-b946-0d6b93f01e31_1776594039115.jpg"
+          },
+          {
+            "name": "Queso",
+            "priceExtra": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/990810f9242641a8e264ce996a78ed28_XL_1776594565133.jpg"
+          },
+          {
+            "name": "Calabresa",
+            "price": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/f5c7e1897edc5417eaf7f9b59c2fd8fb_1776594958914.jpg"
+          },
+          {
+            "name": "Bauru",
+            "price": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/5ecd0a6e-630b-4060-a64b-815c4e54d6c6_1776594119689.jpg"
+          },
+          {
+            "name": "Pizza",
+            "price": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/images_1776594692194.jpeg"
+          },
+          {
+            "name": "Carne con Queso",
+            "price": 1,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/115895438_1246750525658005_4436009483729_1776594190679.jpg"
+          },
+          {
+            "name": "Pollo con Queso",
+            "price": 1,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/05a86a5024d5ef849b4ae6f315a1a4e3_1776594259863.jpg"
+          },
+          {
+            "name": "Costilla",
+            "price": 1.5,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/6F513AE5-2595-4619-AB7B-1D012EEE1135_1776593982797.jpg"
+          },
+          {
+            "name": "Calabresa con Queso",
+            "price": 1,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/images_1776595039381.jpeg"
+          }
+        ],
+        "_libId": "vgl_1776632112860_vnlp"
+      },
+      {
+        "id": "vg_1776635223425",
+        "title": "Sabor de tu coxinha",
+        "maxPerUnit": 1,
+        "required": true,
+        "options": [
+          {
+            "name": "Pollo",
+            "priceExtra": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/9_1776593285403.png"
+          },
+          {
+            "name": "Pollo con Crema de Queso",
+            "price": 0.5,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/Design_sem_nome__5__1776593939061.png"
+          },
+          {
+            "name": "Costilla",
+            "priceExtra": 0,
+            "price": 1,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/10_1776593289439.png"
+          }
+        ],
+        "_libId": "vgl_1776632112860_uls7"
+      },
+      {
+        "id": "vg_1776635229378",
+        "title": "Sabor de tu bebida",
+        "maxPerUnit": 1,
+        "required": true,
+        "options": [
+          {
+            "name": "Guaraná - 350ml",
+            "priceExtra": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/0b4dbec55ed48e8dba7c441719dc3c276bca5c32_1776591786704.jpeg"
+          },
+          {
+            "name": "Zumo de Maracuyá - 350ml",
+            "priceExtra": 1,
+            "price": 1,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/Design_sem_nome__1__1776592326994.png"
+          }
+        ],
+        "_libId": "vgl_1776632112860_jn1g"
+      }
+    ],
+    "shortDesc": "Pastel de feira media luna 20x12 + coxinha XL + bebida fría",
+    "fullDesc": "Pastel de feira media luna (20x12), crujiente y recién hecho, junto a una coxinha XL dorada por fuera y cremosa por dentro.\nAcompañado de una bebida bien fría a tu elección.\nUna combinación potente para quien quiere probar lo mejor en un solo pedido.",
+    "seoTitle": "Combo Brasileño Coxinha XL + Pastel | Bocado Brasil",
+    "seoDesc": "Combo brasileño con coxinha XL (120 g) crujiente, pastel de feira media luna (20×12 cm) y guaraná. Dos clásicos del street food brasileño en un solo menú. Ideal",
+    "seoKeywords": "coxinha, pastel de feira, comida brasileña, combo brasileño, street food brasileño, guaraná, comida brasileña Pamplona, coxinha Pamplona, pastel brasileño, menú brasileño",
+    "microcopy": "Dos clásicos en un solo pedido",
+    "badgeText": "Top ventas",
+    "badgeColor": "#c13506",
+    "badgeTextColor": "#ffffff",
+    "productType": "combo"
+  },
+  {
+    "promo": null,
+    "codigo": "BB-30974",
+    "ofertaDoDia": true,
+    "flavors": [],
+    "extras": [],
+    "id": 4,
+    "name": "Menú 5 – Completo",
+    "desc": "Pastel de feira media luna 20x12 + coxinha XL + bebida fría + brigadeiro",
+    "shortDesc": "Pastel de feira media luna 20x12 + coxinha XL + bebida fría + brigadeiro",
+    "fullDesc": "Pastel de feira media luna (20x12), dorado y crujiente, junto a una coxinha XL con relleno cremoso y bien sazonado.\nAcompañado de una bebida fría a tu elección y un brigadeiro suave y dulce para cerrar.\nUn menú completo que no se queda corto.",
+    "price": 11.5,
+    "category": "menu",
+    "popular": false,
+    "emoji": "🍽️",
+    "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/produtos/2_1776678157118.png",
+    "menuVisible": true,
+    "pairing": 8,
+    "addAlsoIds": [
+      1776590591958,
+      1776590702432
+    ],
+    "microcopy": "Salado, crujiente y dulce en un solo pedido",
+    "badgeText": "",
+    "badgeColor": "",
+    "seoTitle": "Menú brasileño completo con coxinha, pastel y brigadeiro",
+    "seoDesc": "Menú brasileño con coxinha XXL, pastel de feira, dulce y bebida. Ideal para probar variedad o compartir.",
+    "seoKeywords": "menú brasileño, combo brasileño, coxinha y pastel de feira, comida brasileña completa, street food Brasil",
+    "variants": [
+      {
+        "id": "g4-sabor-pastel",
+        "title": "Sabor de tu pastel de feira",
+        "required": true,
+        "maxPerUnit": 1,
+        "options": [
+          {
+            "name": "Carne",
+            "priceExtra": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/download_1776595158424.png"
+          },
+          {
+            "name": "Pollo",
+            "priceExtra": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/24310722-6e48-4889-b946-0d6b93f01e31_1776594039115.jpg"
+          },
+          {
+            "name": "Queso",
+            "priceExtra": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/990810f9242641a8e264ce996a78ed28_XL_1776594565133.jpg"
+          },
+          {
+            "name": "Calabresa",
+            "price": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/f5c7e1897edc5417eaf7f9b59c2fd8fb_1776594958914.jpg"
+          },
+          {
+            "name": "Bauru",
+            "price": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/5ecd0a6e-630b-4060-a64b-815c4e54d6c6_1776594119689.jpg"
+          },
+          {
+            "name": "Pizza",
+            "price": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/images_1776594692194.jpeg"
+          },
+          {
+            "name": "Carne con Queso",
+            "price": 1,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/115895438_1246750525658005_4436009483729_1776594190679.jpg"
+          },
+          {
+            "name": "Pollo con Queso",
+            "price": 1,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/05a86a5024d5ef849b4ae6f315a1a4e3_1776594259863.jpg"
+          },
+          {
+            "name": "Costilla",
+            "price": 1.5,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/6F513AE5-2595-4619-AB7B-1D012EEE1135_1776593982797.jpg"
+          },
+          {
+            "name": "Calabresa con Queso",
+            "price": 1,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/images_1776595039381.jpeg"
+          }
+        ]
+      },
+      {
+        "id": "g4-sabor-coxinha",
+        "title": "Sabor de tu coxinha",
+        "required": true,
+        "maxPerUnit": 1,
+        "options": [
+          {
+            "name": "Pollo",
+            "priceExtra": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/9_1776593285403.png"
+          },
+          {
+            "name": "Pollo con Crema de Queso",
+            "price": 0.5,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/Design_sem_nome__5__1776593939061.png"
+          },
+          {
+            "name": "Costilla",
+            "priceExtra": 0,
+            "price": 1,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/10_1776593289439.png"
+          }
+        ]
+      },
+      {
+        "id": "g4-dulce",
+        "title": "Sabor de tu dulce",
+        "required": true,
+        "maxPerUnit": 1,
+        "options": [
+          {
+            "name": "Brigadeiro Chocolate - 20gr",
+            "priceExtra": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/Design_sem_nome__4__1776593010199.png"
+          },
+          {
+            "name": "Beijinho - 20gr",
+            "priceExtra": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/Design_sem_nome__2__1776592957677.png"
+          },
+          {
+            "name": "Brigadeiro Leche en Polvo - 20gr",
+            "price": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/Design_sem_nome__3__1776592948120.png"
+          }
+        ]
+      },
+      {
+        "id": "g4-bebida",
+        "title": "Sabor de tu bebida",
+        "required": true,
+        "maxPerUnit": 1,
+        "options": [
+          {
+            "name": "Guaraná - 350ml",
+            "priceExtra": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/0b4dbec55ed48e8dba7c441719dc3c276bca5c32_1776591786704.jpeg"
+          },
+          {
+            "name": "Zumo de Maracuyá - 350ml",
+            "priceExtra": 1,
+            "price": 1,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/Design_sem_nome__1__1776592326994.png"
+          }
+        ]
+      }
+    ],
+    "productType": "combo",
+    "badgeTextColor": ""
+  },
+  {
+    "promo": null,
+    "codigo": "BB-02438",
+    "ofertaDoDia": false,
+    "flavors": [],
+    "extras": [],
+    "id": 2,
+    "name": "Menú 6 – Especial",
+    "desc": "Pastel de feira media luna 20x12 + coxinha XL + bebida fría + bolo de prestigio",
+    "shortDesc": "Pastel de feira media luna 20x12 + coxinha XL + bebida fría + bolo de prestigio",
+    "fullDesc": "Pastel de feira media luna (20x12), dorado y crujiente, con relleno abundante que se nota en cada mordida.\nAcompañado de una coxinha XL cremosa por dentro, una bebida bien fría a tu elección y un bolo de prestigio suave y dulce que remata perfecto.\nUn menú para quien no se queda con ganas de nada.",
+    "price": 14.9,
+    "category": "menu",
+    "popular": false,
+    "emoji": "🍗",
+    "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/produtos/Design_sem_nome__10__1776674724850.png",
+    "menuVisible": true,
+    "pairing": 10,
+    "addAlsoIds": [
+      1776590591958,
+      1776590702432
+    ],
+    "microcopy": "Crujiente, cremoso y dulce que engancha",
+    "badgeText": "",
+    "badgeColor": "",
+    "seoTitle": "Menú Especial | Pastel + Coxinha + dulce Pamplona",
+    "seoDesc": "Pastel de feira media luna 20x12 + coxinha XL + bebida + bolo de prestigio. Combo completo en Pamplona. Pide fácil.",
+    "seoKeywords": "pastel de feira pamplona, coxinha pamplona, bolo de prestigio pamplona, combo brasileño pamplona, comida brasileña pamplona, menú especial pamplona",
+    "variants": [
+      {
+        "id": "vg_1776673083378",
+        "title": "Sabor de tu pastel de feira",
+        "maxPerUnit": 1,
+        "required": true,
+        "options": [
+          {
+            "name": "Carne",
+            "priceExtra": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/download_1776595158424.png"
+          },
+          {
+            "name": "Pollo",
+            "priceExtra": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/24310722-6e48-4889-b946-0d6b93f01e31_1776594039115.jpg"
+          },
+          {
+            "name": "Queso",
+            "priceExtra": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/990810f9242641a8e264ce996a78ed28_XL_1776594565133.jpg"
+          },
+          {
+            "name": "Calabresa",
+            "price": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/f5c7e1897edc5417eaf7f9b59c2fd8fb_1776594958914.jpg"
+          },
+          {
+            "name": "Bauru",
+            "price": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/5ecd0a6e-630b-4060-a64b-815c4e54d6c6_1776594119689.jpg"
+          },
+          {
+            "name": "Pizza",
+            "price": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/images_1776594692194.jpeg"
+          },
+          {
+            "name": "Carne con Queso",
+            "price": 1,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/115895438_1246750525658005_4436009483729_1776594190679.jpg"
+          },
+          {
+            "name": "Pollo con Queso",
+            "price": 1,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/05a86a5024d5ef849b4ae6f315a1a4e3_1776594259863.jpg"
+          },
+          {
+            "name": "Costilla",
+            "price": 1.5,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/6F513AE5-2595-4619-AB7B-1D012EEE1135_1776593982797.jpg"
+          },
+          {
+            "name": "Calabresa con Queso",
+            "price": 1,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/images_1776595039381.jpeg"
+          }
+        ],
+        "_libId": "vgl_1776632112860_vnlp"
+      },
+      {
+        "id": "vg_1776633629367",
+        "title": "Sabor de tu coxinha",
+        "maxPerUnit": 1,
+        "required": true,
+        "options": [
+          {
+            "name": "Pollo",
+            "priceExtra": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/9_1776593285403.png"
+          },
+          {
+            "name": "Pollo con Crema de Queso",
+            "price": 0.5,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/Design_sem_nome__5__1776593939061.png"
+          },
+          {
+            "name": "Costilla",
+            "priceExtra": 0,
+            "price": 1,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/10_1776593289439.png"
+          }
+        ],
+        "_libId": "vgl_1776632112860_uls7"
+      },
+      {
+        "id": "vg_1776633634487",
+        "title": "Sabor de tu bebida",
+        "maxPerUnit": 1,
+        "required": true,
+        "options": [
+          {
+            "name": "Guaraná - 350ml",
+            "priceExtra": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/0b4dbec55ed48e8dba7c441719dc3c276bca5c32_1776591786704.jpeg"
+          },
+          {
+            "name": "Zumo de Maracuyá - 350ml",
+            "priceExtra": 1,
+            "price": 1,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/Design_sem_nome__1__1776592326994.png"
+          }
+        ],
+        "_libId": "vgl_1776632112860_jn1g"
+      }
+    ],
+    "productType": "combo",
+    "badgeTextColor": ""
+  },
+  {
+    "promo": null,
+    "codigo": "BB-41558",
+    "ofertaDoDia": false,
+    "flavors": [],
+    "extras": [],
+    "id": 5,
+    "name": "Pastel de feira media luna 20x12",
+    "desc": "Pastel crujiente, grande y recién hecho con relleno generoso",
+    "shortDesc": "Pastel crujiente, grande y recién hecho con relleno generoso",
+    "fullDesc": "Pastel de feira media luna (20x12), frito al momento, dorado y crujiente por fuera, con relleno abundante y sabroso por dentro.\nUn clásico de la calle brasileña en tamaño que realmente llena.\nHecho al momento para que llegue caliente y en su punto.",
+    "price": 3.5,
+    "category": "salgados",
+    "popular": false,
+    "emoji": "🍴",
+    "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/produtos/41cd6d97-6a1a-4af3-8fbf-1bfbc956c1e6_1776674016733.jpg",
+    "menuVisible": true,
+    "pairing": 14,
+    "addAlsoIds": [
+      1776590591958,
+      1776590702432
+    ],
+    "microcopy": "Cruje al morder, no se olvida",
+    "badgeText": "Top ventas",
+    "badgeColor": "#c13506",
+    "seoTitle": "Pastel de feira en Pamplona | XL crujiente",
+    "seoDesc": "Pastel de feira media luna 20x12, crujiente y recién hecho. Pide en Pamplona y prueba el street food brasileño.",
+    "seoKeywords": "pastel de feira pamplona, pastel brasileño pamplona, empanada brasileña pamplona, street food brasileño, comida brasileña pamplona, pedir pastel pamplona",
+    "variants": [
+      {
+        "id": "vg_1776673916668",
+        "title": "Sabor de tu pastel de feira",
+        "maxPerUnit": 1,
+        "required": true,
+        "options": [
+          {
+            "name": "Carne",
+            "priceExtra": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/download_1776595158424.png"
+          },
+          {
+            "name": "Pollo",
+            "priceExtra": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/24310722-6e48-4889-b946-0d6b93f01e31_1776594039115.jpg"
+          },
+          {
+            "name": "Queso",
+            "priceExtra": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/990810f9242641a8e264ce996a78ed28_XL_1776594565133.jpg"
+          },
+          {
+            "name": "Calabresa",
+            "price": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/f5c7e1897edc5417eaf7f9b59c2fd8fb_1776594958914.jpg"
+          },
+          {
+            "name": "Bauru",
+            "price": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/5ecd0a6e-630b-4060-a64b-815c4e54d6c6_1776594119689.jpg"
+          },
+          {
+            "name": "Pizza",
+            "price": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/images_1776594692194.jpeg"
+          },
+          {
+            "name": "Carne con Queso",
+            "price": 1,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/115895438_1246750525658005_4436009483729_1776594190679.jpg"
+          },
+          {
+            "name": "Pollo con Queso",
+            "price": 1,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/05a86a5024d5ef849b4ae6f315a1a4e3_1776594259863.jpg"
+          },
+          {
+            "name": "Costilla",
+            "price": 1.5,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/6F513AE5-2595-4619-AB7B-1D012EEE1135_1776593982797.jpg"
+          },
+          {
+            "name": "Calabresa con Queso",
+            "price": 1,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/images_1776595039381.jpeg"
+          }
+        ],
+        "_libId": "vgl_1776632112860_vnlp"
+      }
+    ],
+    "badgeTextColor": "#ffffff",
+    "productType": "combo"
+  },
+  {
+    "promo": {
+      "type": "2x1",
+      "freeProductId": 6
+    },
+    "codigo": "BB-41554",
+    "ofertaDoDia": false,
+    "flavors": [],
+    "extras": [],
+    "id": 6,
+    "name": "Coxinha XL",
+    "desc": "Coxinha XL 120g, crujiente por fuera, relleno cremoso",
+    "shortDesc": "Coxinha XL 120g, crujiente por fuera, relleno cremoso",
+    "fullDesc": "Coxinha XL (120g), dorada y crujiente por fuera, con relleno desmenuzado y bien sazonado.\nUn clásico brasileño que sorprende desde el primer bocado.\nHecha al momento para mantener textura y sabor.",
+    "price": 5.5,
+    "category": "salgados",
+    "popular": false,
+    "emoji": "🔥",
+    "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/produtos/13_1776674198406.png",
+    "menuVisible": true,
+    "pairing": 7,
+    "addAlsoIds": [
+      1776590591958,
+      1776590702432
+    ],
+    "microcopy": "El favorito de Brasil",
+    "badgeText": "Favorito",
+    "badgeColor": "#daae10",
+    "seoTitle": "Coxinha XL en Pamplona | Crujiente y cremosa",
+    "seoDesc": "Coxinha XL 120g, crujiente por fuera y cremosa por dentro. Prueba el clásico brasileño en Pamplona. Pide ahora.",
+    "seoKeywords": "coxinha pamplona, coxinha brasileña pamplona, comida brasileña pamplona, snack brasileño pamplona, street food brasileño, coxinha xl",
+    "variants": [
+      {
+        "id": "vg_1776674205579",
+        "title": "Sabor de tu coxinha",
+        "maxPerUnit": 1,
+        "required": true,
+        "options": [
+          {
+            "name": "Pollo",
+            "priceExtra": 0,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/9_1776593285403.png"
+          },
+          {
+            "name": "Pollo con Crema de Queso",
+            "price": 0.5,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/Design_sem_nome__5__1776593939061.png"
+          },
+          {
+            "name": "Costilla",
+            "priceExtra": 0,
+            "price": 1,
+            "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/variantes/10_1776593289439.png"
+          }
+        ],
+        "_libId": "vgl_1776632112860_uls7"
+      }
+    ],
+    "badgeTextColor": "#fcfcfc",
+    "productType": "combo"
+  },
+  {
+    "promo": null,
+    "codigo": "BB-41556",
+    "ofertaDoDia": false,
+    "flavors": [],
+    "extras": [],
+    "id": 7,
+    "name": "Kibe frito XL 120g",
+    "desc": "Kibe XL 120g, crujiente por fuera, jugoso por dentro",
+    "shortDesc": "Kibe XL 120g, crujiente por fuera, jugoso por dentro",
+    "fullDesc": "Kibe frito XL (120g), dorado y crujiente por fuera, con interior jugoso y bien sazonado.\nUna opción intensa y diferente, hecha al momento para mantener textura y sabor en cada bocado.",
+    "price": 4.5,
+    "category": "salgados",
+    "popular": false,
+    "emoji": "🍽️",
+    "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/produtos/17_1776674316411.png",
+    "menuVisible": true,
+    "pairing": 5,
+    "addAlsoIds": [
+      1776590591958,
+      1776590702432
+    ],
+    "microcopy": "Cruje al morder, sabor que sorprende",
+    "badgeText": "",
+    "badgeColor": "",
+    "seoTitle": "Kibe frito en Pamplona | Crujiente y jugoso",
+    "seoDesc": "Kibe frito XL 120g, crujiente por fuera y jugoso por dentro. Prueba este clásico en Pamplona. Pide fácil.",
+    "seoKeywords": "kibe pamplona, kibbeh pamplona, comida brasileña pamplona, kibe frito, street food brasileño, comida árabe brasileña",
+    "variants": [],
+    "badgeTextColor": "",
+    "productType": "combo"
+  },
+  {
+    "promo": null,
+    "codigo": "BB-41558",
+    "ofertaDoDia": false,
+    "flavors": [],
+    "extras": [],
+    "id": 8,
+    "name": "Bolota de queso y orégano 120g",
+    "desc": "Bolitas de queso con orégano, crujientes por fuera y cremosas por dentro",
+    "shortDesc": "Bolitas de queso con orégano, crujientes por fuera y cremosas por dentro",
+    "fullDesc": "Bolota de queso con orégano, fritas al momento, doradas y crujientes por fuera, con interior cremoso y fundente.\nEl toque de orégano realza el sabor y las hace aún más adictivas.\nPerfectas para picar o acompañar.",
+    "price": 3.5,
+    "category": "salgados",
+    "popular": false,
+    "emoji": "🧀",
+    "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/produtos/18_1776674368777.png",
+    "menuVisible": true,
+    "pairing": 10,
+    "addAlsoIds": [
+      1776590591958,
+      1776590702432
+    ],
+    "microcopy": "Queso fundente con toque de orégano",
+    "badgeText": "",
+    "badgeColor": "",
+    "seoTitle": "Bolota de queijo",
+    "seoDesc": "Bolitas de queso con orégano, crujientes por fuera y cremosas por dentro. Pide en Pamplona y disfruta caliente.",
+    "seoKeywords": "bolitas de queso pamplona, queso con oregano pamplona, queso frito pamplona, comida brasileña pamplona, snack de queso",
+    "variants": [],
+    "badgeTextColor": "",
+    "productType": "simple"
+  },
+  {
+    "promo": null,
+    "codigo": "BB-87259",
+    "ofertaDoDia": false,
+    "flavors": [],
+    "extras": [],
+    "id": 9,
+    "name": "Trío mix de dulces brasileños",
+    "desc": "1 brigadeiro + 1 beijinho + 1 de leche en polvo",
+    "shortDesc": "1 brigadeiro + 1 beijinho + 1 de leche en polvo",
+    "fullDesc": "Un trío pensado para probarlo todo:\n1 brigadeiro de chocolate, 1 beijinho de coco y 1 de leche en polvo.\nTres sabores, tres texturas y una sola decisión fácil.\nPerfecto para descubrir los dulces brasileños sin complicarte.",
+    "price": 4.5,
+    "category": "dulces",
+    "popular": false,
+    "emoji": "🍫",
+    "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/produtos/25_1776675622409.png",
+    "menuVisible": true,
+    "pairing": 16,
+    "addAlsoIds": [],
+    "microcopy": "Ideal para probar",
+    "badgeText": "Ahorro",
+    "badgeColor": "#1A7A3C",
+    "seoTitle": "Combo 3 dulces brasileños",
+    "seoDesc": "Trío mix dulces brasileños en Pamplona",
+    "seoKeywords": "Trío mix dulces brasileños en Pamplona",
+    "variants": [],
+    "badgeTextColor": "#ffffff",
+    "productType": "simple"
+  },
+  {
+    "promo": null,
+    "codigo": "BB-41557",
+    "ofertaDoDia": false,
+    "flavors": [],
+    "extras": [],
+    "id": 10,
+    "name": "Trío de brigadeiros",
+    "desc": "3 brigadeiros cremosos de chocolate, intensos y suaves",
+    "shortDesc": "3 brigadeiros cremosos de chocolate, intensos y suaves",
+    "fullDesc": "Tres brigadeiros caseros, cremosos y con sabor intenso a chocolate que se derriten en la boca.\nUn clásico brasileño en versión perfecta para darte un capricho o compartir (si puedes).",
+    "price": 4.5,
+    "category": "dulces",
+    "popular": false,
+    "emoji": "🍽️",
+    "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/produtos/24_1776675107574.png",
+    "menuVisible": true,
+    "pairing": 13,
+    "addAlsoIds": [],
+    "microcopy": "Uno no basta",
+    "badgeText": "",
+    "badgeColor": "",
+    "seoTitle": "Trío de brigadeiros en Pamplona | Dulce brasileño",
+    "seoDesc": "3 brigadeiros cremosos de chocolate. Dulce brasileño irresistible en Pamplona. Pide fácil y date un capricho.",
+    "seoKeywords": "brigadeiro pamplona, trio de brigadeiros, dulces brasileños pamplona, chocolate brasileño, postre pamplona",
+    "variants": [],
+    "badgeTextColor": "",
+    "productType": "simple"
+  },
+  {
+    "promo": null,
+    "codigo": "BB-41557",
+    "ofertaDoDia": false,
+    "flavors": [],
+    "extras": [],
+    "id": 1776675287258,
+    "name": "Trío de brigadeiros de leche en polvo",
+    "desc": "3 brigadeiros de leche en polvo, cremosos y suaves",
+    "shortDesc": "3 brigadeiros de leche en polvo, cremosos y suaves",
+    "fullDesc": "Tres brigadeiros de leche en polvo, suaves y cremosos, con textura que se derrite en la boca y sabor delicado que sorprende desde el primer bocado.\nUna versión diferente del clásico brasileño, perfecta para quien quiere probar algo nuevo.",
+    "price": 4.5,
+    "category": "dulces",
+    "popular": false,
+    "emoji": "🍽️",
+    "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/produtos/23_1776675307847.png",
+    "menuVisible": true,
+    "pairing": 15,
+    "addAlsoIds": [],
+    "microcopy": "Suaves, cremosos y difíciles de olvidar",
+    "badgeText": "",
+    "badgeColor": "",
+    "seoTitle": "Brigadeiros de leche en polvo en Pamplona | Trío",
+    "seoDesc": "Trío de brigadeiros de leche en polvo, suaves y cremosos. Dulce brasileño diferente en Pamplona. Pide fácil.",
+    "seoKeywords": "brigadeiro leche en polvo pamplona, dulces brasileños pamplona, brigadeiros caseros pamplona, postre brasileño pamplona",
+    "variants": [],
+    "badgeTextColor": "",
+    "productType": "simple"
+  },
+  {
+    "promo": null,
+    "codigo": "BB-87259",
+    "ofertaDoDia": false,
+    "flavors": [],
+    "extras": [],
+    "id": 11,
+    "name": "Trío de beijinho",
+    "desc": "3 beijinhos de coco, suaves, cremosos y con sabor tropical",
+    "shortDesc": "3 beijinhos de coco, suaves, cremosos y con sabor tropical",
+    "fullDesc": "Tres beijinhos caseros, dulces brasileños de coco, suaves y cremosos, con textura que se derrite en la boca.\nUn clásico diferente, con sabor tropical y delicado que sorprende desde el primer bocado.",
+    "price": 4.5,
+    "category": "dulces",
+    "popular": false,
+    "emoji": "🍽️",
+    "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/produtos/22_1776675538702.png",
+    "menuVisible": true,
+    "pairing": 12,
+    "addAlsoIds": [],
+    "microcopy": "Dulce de coco que se derrite",
+    "badgeText": "",
+    "badgeColor": "",
+    "seoTitle": "Beijinho en Pamplona | Dulce de coco brasileño",
+    "seoDesc": "Trío de beijinho, dulce brasileño de coco, suave y cremoso. Prueba algo diferente en Pamplona. Pide fácil.",
+    "seoKeywords": "beijinho pamplona, dulce de coco brasileño, dulces brasileños pamplona, postre brasileño pamplona, coco dulce",
+    "variants": [],
+    "badgeTextColor": "",
+    "productType": "simple"
+  },
+  {
+    "promo": null,
+    "codigo": "BB-87267",
+    "ofertaDoDia": false,
+    "flavors": [],
+    "extras": [],
+    "id": 12,
+    "name": "Bizcocho de chocolate y coco (Prestigio)",
+    "desc": "Bizcocho de chocolate con relleno cremoso de coco, suave y intenso",
+    "shortDesc": "Bizcocho de chocolate con relleno cremoso de coco, suave y intenso",
+    "fullDesc": "Bizcocho de chocolate suave y esponjoso, relleno con una capa cremosa de coco que equilibra lo dulce y lo intenso en cada bocado.\nUna combinación clásica que se derrite en la boca y deja ganas de repetir.\nPerfecto para cerrar el pedido con algo realmente especial.",
+    "price": 5.5,
+    "category": "dulces",
+    "popular": false,
+    "emoji": "🍰",
+    "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/produtos/20_1776675808474.png",
+    "menuVisible": true,
+    "pairing": 11,
+    "addAlsoIds": [],
+    "microcopy": "Chocolate y coco que se derriten juntos",
+    "badgeText": "Top ventas",
+    "badgeColor": "#c13506",
+    "seoTitle": "Bizcocho chocolate y coco en Pamplona | Prestigio",
+    "seoDesc": "Bizcocho de chocolate con coco cremoso. Dulce tipo Prestigio en Pamplona. Pide fácil y disfruta algo especial.",
+    "seoKeywords": "bizcocho chocolate coco pamplona, pastel prestigio pamplona, dulces brasileños pamplona, postre chocolate coco, comida brasileña pamplona",
+    "variants": [],
+    "badgeTextColor": "#ffffff",
+    "productType": "simple"
+  },
+  {
+    "promo": null,
+    "codigo": "BB-87264",
+    "ofertaDoDia": false,
+    "flavors": [],
+    "extras": [],
+    "id": 13,
+    "name": "Bizcocho de zanahoria con chocolate",
+    "desc": "Bizcocho de zanahoria con cobertura de chocolate + 1 brigadeiro",
+    "shortDesc": "Bizcocho de zanahoria con cobertura de chocolate + 1 brigadeiro",
+    "fullDesc": "Bizcocho de zanahoria suave y esponjoso, con textura húmeda y sabor equilibrado, cubierto con una capa de chocolate que lo hace aún más irresistible.\nAcompañado de un brigadeiro cremoso que remata perfecto cada bocado.\nUn clásico que no falla, pero mejorado.",
+    "price": 5.5,
+    "category": "dulces",
+    "popular": false,
+    "emoji": "🥕",
+    "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/produtos/19_1776675962202.png",
+    "menuVisible": true,
+    "pairing": 10,
+    "addAlsoIds": [],
+    "microcopy": "Suave por dentro, chocolate por encima",
+    "badgeText": "Favorito",
+    "badgeColor": "#daae10",
+    "seoTitle": "Bizcocho zanahoria con chocolate en Pamplona",
+    "seoDesc": "Bizcocho de zanahoria con cobertura de chocolate + brigadeiro. Suave, cremoso y delicioso en Pamplona. Pide fácil.",
+    "seoKeywords": "bizcocho zanahoria chocolate pamplona, carrot cake chocolate pamplona, dulces brasileños pamplona, postre zanahoria chocolate, brigadeiro pamplona",
+    "variants": [],
+    "badgeTextColor": "#fcfcfc",
+    "productType": "simple"
+  },
+  {
+    "promo": null,
+    "codigo": "BB-87263",
+    "ofertaDoDia": false,
+    "flavors": [],
+    "extras": [],
+    "id": 14,
+    "name": "Pão de queijo (10 unidades · 30g)",
+    "desc": "10 unidades de pão de queijo (30g), crujiente por fuera y suave por dentro",
+    "shortDesc": "10 unidades de pão de queijo (30g), crujiente por fuera y suave por dentro",
+    "fullDesc": "10 unidades de pão de queijo (30g cada uno), dorados por fuera y suaves por dentro, con sabor auténtico que engancha desde el primero.\nPuedes elegirlos recién horneados para disfrutar al momento o congelados para tenerlos listos en casa cuando quieras.",
+    "price": 6.5,
+    "category": "pao-de-queijo",
+    "popular": false,
+    "emoji": "🧀",
+    "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/produtos/26_1776676261075.png",
+    "menuVisible": true,
+    "pairing": 10,
+    "addAlsoIds": [
+      1776676482058,
+      1776676500262
+    ],
+    "microcopy": "Caliente y recién hecho, imposible parar",
+    "badgeText": "Top ventas",
+    "badgeColor": "#c13506",
+    "seoTitle": "Pão de queijo en Pamplona | 10 unidades",
+    "seoDesc": "Pão de queijo (10 unidades), crujiente por fuera y suave por dentro. Elige horneado o congelado en Pamplona. Pide fácil.",
+    "seoKeywords": "pão de queijo pamplona, pan de queso brasileño, pão de queijo congelado, comida brasileña pamplona, pan de queso pamplona",
+    "variants": [
+      {
+        "id": "g14-prep",
+        "title": "Preparación",
+        "required": true,
+        "maxPerUnit": 1,
+        "options": [
+          {
+            "name": "Horneado",
+            "priceExtra": 0,
+            "price": 1
+          },
+          {
+            "name": "Congelado",
+            "priceExtra": 0
+          }
+        ]
+      }
+    ],
+    "badgeTextColor": "#ffffff",
+    "productType": "combo"
+  },
+  {
+    "promo": null,
+    "codigo": "BB-00271",
+    "ofertaDoDia": false,
+    "flavors": [],
+    "extras": [],
+    "id": 15,
+    "name": "Pão de queijo con goiabada (10 unidades · 30g)",
+    "desc": "10 unidades de pão de queijo con goiabada, dulce y salado en equilibrio",
+    "shortDesc": "10 unidades de pão de queijo con goiabada, dulce y salado en equilibrio",
+    "fullDesc": "10 unidades de pão de queijo (30g cada uno) con relleno de goiabada, combinando el sabor salado del queso con un toque dulce que sorprende desde el primer bocado.\nCrujientes por fuera y suaves por dentro.\nPuedes elegirlos recién horneados o congelados para disfrutarlos cuando quieras.",
+    "price": 9.9,
+    "category": "pao-de-queijo",
+    "popular": false,
+    "emoji": "🧀",
+    "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/produtos/27_1776677322344.png",
+    "menuVisible": true,
+    "pairing": 13,
+    "addAlsoIds": [
+      1776677341162,
+      1776677342498
+    ],
+    "microcopy": "Dulce y salado que sorprende",
+    "badgeText": "",
+    "badgeColor": "",
+    "seoTitle": "Pão de queijo con goiabada en Pamplona",
+    "seoDesc": "Pão de queijo con goiabada (10 unidades), mezcla dulce y salada única. Elige horneado o congelado en Pamplona.",
+    "seoKeywords": "pão de queijo goiabada pamplona, pan de queso dulce salado, comida brasileña pamplona, pão de queijo dulce, snack brasileño pamplona",
+    "variants": [
+      {
+        "id": "g15-prep",
+        "title": "Preparación",
+        "required": true,
+        "maxPerUnit": 1,
+        "options": [
+          {
+            "name": "Horneado",
+            "priceExtra": 0,
+            "price": 1
+          },
+          {
+            "name": "Congelado",
+            "priceExtra": 0
+          }
+        ]
+      }
+    ],
+    "badgeTextColor": "",
+    "productType": "combo"
+  },
+  {
+    "promo": null,
+    "codigo": "BB-42505",
+    "ofertaDoDia": false,
+    "flavors": [],
+    "extras": [],
+    "id": 16,
+    "name": "Guaraná",
+    "desc": "Refresco brasileño",
+    "shortDesc": "Refresco brasileño",
+    "fullDesc": "Bebida típica de Brasil, refrescante.",
+    "price": 2.5,
+    "category": "bebidas",
+    "popular": false,
+    "emoji": "🟢",
+    "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/produtos/0b4dbec55ed48e8dba7c441719dc3c276bca5c32_1776677840885.jpeg",
+    "menuVisible": true,
+    "pairing": null,
+    "addAlsoIds": [],
+    "microcopy": "El clásico brasileño",
+    "badgeText": "Favorito",
+    "badgeColor": "#daae10",
+    "seoTitle": "Guaraná brasileño",
+    "seoDesc": "Refresco típico de Brasil.",
+    "seoKeywords": "guaraná",
+    "variants": [],
+    "badgeTextColor": "#fcfcfc",
+    "productType": "simple"
+  },
+  {
+    "promo": null,
+    "codigo": "BB-42504",
+    "ofertaDoDia": false,
+    "flavors": [],
+    "extras": [],
+    "id": 17,
+    "name": "Zumo de maracuyá (350 ml)",
+    "desc": "Zumo de maracuyá 350 ml, refrescante y con toque tropical",
+    "shortDesc": "Zumo de maracuyá 350 ml, refrescante y con toque tropical",
+    "fullDesc": "Zumo de maracuyá natural (350 ml), refrescante, con ese equilibrio perfecto entre dulce y ácido que abre el apetito y acompaña cualquier bocado.\nLigero, tropical y diferente.",
+    "price": 3.5,
+    "category": "bebidas",
+    "popular": false,
+    "emoji": "🍽️",
+    "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/produtos/Design_sem_nome__1__1776677871056.png",
+    "menuVisible": true,
+    "pairing": null,
+    "addAlsoIds": [],
+    "microcopy": "Refresca y despierta el sabor",
+    "badgeText": "",
+    "badgeColor": "",
+    "seoTitle": "Zumo de maracuyá",
+    "seoDesc": "Bebida tropical natural.",
+    "seoKeywords": "maracuyá",
+    "variants": [],
+    "badgeTextColor": "",
+    "productType": "simple"
+  },
+  {
+    "promo": null,
+    "codigo": "BB-06813",
+    "ofertaDoDia": false,
+    "flavors": [],
+    "extras": [],
+    "id": 1776590591958,
+    "name": "Salsa de Guayaba",
+    "desc": "Salsa de guayaba dulce y suave para acompañar",
+    "price": 2,
+    "emoji": "🍽️",
+    "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/produtos/3_1776590606144.png",
+    "popular": false,
+    "menuVisible": true,
+    "category": "complementos",
+    "pairing": 6,
+    "addAlsoIds": [],
+    "variants": [],
+    "shortDesc": "Salsa de guayaba dulce y suave para acompañar",
+    "fullDesc": "Salsa de guayaba de sabor dulce y equilibrado, ideal para acompañar coxinhas, pasteles o cualquier snack. Aporta un contraste suave que realza el sabor de cada bocado.",
+    "seoTitle": "",
+    "seoDesc": "",
+    "seoKeywords": "",
+    "microcopy": "El toque perfecto para tu pedido",
+    "badgeText": "Top ventas",
+    "badgeColor": "#c13506",
+    "badgeTextColor": "#ffffff",
+    "productType": "simple"
+  },
+  {
+    "promo": null,
+    "codigo": "BB-06811",
+    "ofertaDoDia": false,
+    "flavors": [],
+    "extras": [],
+    "id": 1776590702432,
+    "name": "Salsa Alioli",
+    "desc": "Salsa cremosa de ajo suave y equilibrada",
+    "price": 1,
+    "emoji": "🍽️",
+    "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/produtos/4_1776590832303.png",
+    "popular": false,
+    "menuVisible": true,
+    "category": "complementos",
+    "pairing": 5,
+    "addAlsoIds": [],
+    "variants": [],
+    "shortDesc": "Salsa cremosa de ajo suave y equilibrada",
+    "fullDesc": "Salsa alioli cremosa, con sabor a ajo suave y textura equilibrada. Ideal para acompañar coxinhas, pasteles y cualquier snack, aportando un toque sabroso sin ser intenso.",
+    "seoTitle": "",
+    "seoDesc": "",
+    "seoKeywords": "",
+    "microcopy": "El clásico que combina con todo",
+    "badgeText": "",
+    "badgeColor": "",
+    "badgeTextColor": "",
+    "productType": "simple"
+  },
+  {
+    "promo": null,
+    "codigo": "BB-87266",
+    "ofertaDoDia": false,
+    "flavors": [],
+    "extras": [],
+    "id": 1776676482058,
+    "name": "+ 5 unidades",
+    "desc": "",
+    "price": 3,
+    "emoji": "🍽️",
+    "img": "",
+    "popular": false,
+    "menuVisible": false,
+    "category": "pao-de-queijo",
+    "pairing": null,
+    "addAlsoIds": [],
+    "variants": [],
+    "shortDesc": "",
+    "fullDesc": "",
+    "seoTitle": "",
+    "seoDesc": "",
+    "seoKeywords": "",
+    "microcopy": "",
+    "badgeText": "",
+    "badgeColor": "",
+    "badgeTextColor": "",
+    "productType": "simple"
+  },
+  {
+    "promo": null,
+    "codigo": "BB-82059",
+    "ofertaDoDia": false,
+    "flavors": [],
+    "extras": [],
+    "id": 1776676500262,
+    "name": "+ 10 unidades",
+    "desc": "",
+    "price": 4.8,
+    "emoji": "🍽️",
+    "img": "",
+    "popular": false,
+    "menuVisible": false,
+    "category": "pao-de-queijo",
+    "pairing": null,
+    "addAlsoIds": [],
+    "variants": [],
+    "shortDesc": "",
+    "fullDesc": "",
+    "seoTitle": "",
+    "seoDesc": "",
+    "seoKeywords": "",
+    "microcopy": "",
+    "badgeText": "",
+    "badgeColor": "",
+    "badgeTextColor": "",
+    "productType": "simple"
+  },
+  {
+    "promo": null,
+    "codigo": "BB-87266",
+    "ofertaDoDia": false,
+    "flavors": [],
+    "extras": [],
+    "id": 1776677341162,
+    "name": "+ 5 unidades - con guayaba",
+    "desc": "",
+    "price": 4,
+    "emoji": "🍽️",
+    "img": "",
+    "popular": false,
+    "menuVisible": false,
+    "category": "pao-de-queijo",
+    "pairing": null,
+    "addAlsoIds": [],
+    "variants": [],
+    "shortDesc": "",
+    "fullDesc": "",
+    "seoTitle": "",
+    "seoDesc": "",
+    "seoKeywords": "",
+    "microcopy": "",
+    "badgeText": "",
+    "badgeColor": "",
+    "badgeTextColor": "",
+    "productType": "simple"
+  },
+  {
+    "promo": null,
+    "codigo": "BB-87266",
+    "ofertaDoDia": false,
+    "flavors": [],
+    "extras": [],
+    "id": 1776677342498,
+    "name": "+ 10 unidades - con guayaba",
+    "desc": "",
+    "price": 7,
+    "emoji": "🍽️",
+    "img": "",
+    "popular": false,
+    "menuVisible": false,
+    "category": "pao-de-queijo",
+    "pairing": null,
+    "addAlsoIds": [],
+    "variants": [],
+    "shortDesc": "",
+    "fullDesc": "",
+    "seoTitle": "",
+    "seoDesc": "",
+    "seoKeywords": "",
+    "microcopy": "",
+    "badgeText": "",
+    "badgeColor": "",
+    "badgeTextColor": "",
+    "productType": "simple"
+  }
+]
