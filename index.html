@@ -2233,9 +2233,9 @@ const BB_FB_CFG={
 firebase.initializeApp(BB_FB_CFG);
 const db=firebase.firestore();
 const fbAuth=firebase.auth();
+var PUBLISHED_TENANT_ID='';
 
-function tenantIdFromUrl(){return "c7BL3Fz9jmcfKkao2Osth9sROEi1";}catch(e){return''}
-}
+function tenantIdFromUrl(){return "c7BL3Fz9jmcfKkao2Osth9sROEi1";}
 function tenantDoc(col,id){return db.collection('tenants/'+tenantIdFromUrl()+'/'+col).doc(id)}
 function tenantCol(col){return db.collection('tenants/'+tenantIdFromUrl()+'/'+col)}
 function shopCol(col){const tid=tenantIdFromUrl();return tid?db.collection('tenants/'+tid+'/'+col):db.collection(col)}
