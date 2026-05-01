@@ -3,8 +3,12 @@
     "promo": null,
     "codigo": "BB-02439",
     "ofertaDoDia": false,
-    "flavors": [],
-    "extras": [],
+    "flavors": [
+
+    ],
+    "extras": [
+
+    ],
     "id": 1,
     "name": "Menú 1 – Clásico",
     "desc": "Pastel de feira media luna 20x12 + bebida fría",
@@ -109,14 +113,19 @@
       }
     ],
     "badgeTextColor": "",
-    "productType": "combo"
+    "productType": "combo",
+    "slug": "menu-1-clasico"
   },
   {
     "promo": null,
     "codigo": "BB-02434",
     "ofertaDoDia": false,
-    "flavors": [],
-    "extras": [],
+    "flavors": [
+
+    ],
+    "extras": [
+
+    ],
     "id": 3,
     "name": "Menú 2 – Favorito",
     "desc": "Pastel de feira media luna 20x12 + bebida fría + brigadeiro",
@@ -245,14 +254,19 @@
       }
     ],
     "productType": "combo",
-    "badgeTextColor": "#fcfcfc"
+    "badgeTextColor": "#fcfcfc",
+    "slug": "menu-2-favorito"
   },
   {
     "promo": null,
     "codigo": "BB-02441",
     "ofertaDoDia": false,
-    "flavors": [],
-    "extras": [],
+    "flavors": [
+
+    ],
+    "extras": [
+
+    ],
     "id": 1776680606807,
     "name": "Menú 3 - De la casa",
     "desc": "Pastel de feira media luna 20x12 + bebida fría + bizcocho de zanahoria",
@@ -357,14 +371,19 @@
     "badgeText": "Favorito",
     "badgeColor": "#daae10",
     "badgeTextColor": "#fcfcfc",
-    "productType": "combo"
+    "productType": "combo",
+    "slug": "menu-3-de-la-casa"
   },
   {
     "promo": null,
     "codigo": "BB-02441",
     "ofertaDoDia": false,
-    "flavors": [],
-    "extras": [],
+    "flavors": [
+
+    ],
+    "extras": [
+
+    ],
     "id": 1776635241552,
     "name": "Menú 4 – Mix",
     "desc": "Pastel de feira media luna 20x12 + coxinha XL + bebida fría",
@@ -494,14 +513,19 @@
     "badgeText": "Top ventas",
     "badgeColor": "#c13506",
     "badgeTextColor": "#ffffff",
-    "productType": "combo"
+    "productType": "combo",
+    "slug": "menu-4-mix"
   },
   {
     "promo": null,
     "codigo": "BB-30974",
     "ofertaDoDia": true,
-    "flavors": [],
-    "extras": [],
+    "flavors": [
+
+    ],
+    "extras": [
+
+    ],
     "id": 4,
     "name": "Menú 5 – Completo",
     "desc": "Pastel de feira media luna 20x12 + coxinha XL + bebida fría + brigadeiro",
@@ -651,14 +675,19 @@
       }
     ],
     "productType": "combo",
-    "badgeTextColor": ""
+    "badgeTextColor": "",
+    "slug": "menu-5-completo"
   },
   {
     "promo": null,
     "codigo": "BB-02438",
     "ofertaDoDia": false,
-    "flavors": [],
-    "extras": [],
+    "flavors": [
+
+    ],
+    "extras": [
+
+    ],
     "id": 2,
     "name": "Menú 6 – Especial",
     "desc": "Pastel de feira media luna 20x12 + coxinha XL + bebida fría + bolo de prestigio",
@@ -788,14 +817,19 @@
       }
     ],
     "productType": "combo",
-    "badgeTextColor": ""
+    "badgeTextColor": "",
+    "slug": "menu-6-especial"
   },
   {
     "promo": null,
     "codigo": "BB-41558",
     "ofertaDoDia": false,
-    "flavors": [],
-    "extras": [],
+    "flavors": [
+
+    ],
+    "extras": [
+
+    ],
     "id": 5,
     "name": "Pastel de feira media luna 20x12",
     "desc": "Pastel crujiente, grande y recién hecho con relleno generoso",
@@ -880,7 +914,8 @@
       }
     ],
     "badgeTextColor": "#ffffff",
-    "productType": "combo"
+    "productType": "combo",
+    "slug": "pastel-de-feira-media-luna-20x12"
   },
   {
     "promo": {
@@ -889,8 +924,12 @@
     },
     "codigo": "BB-41554",
     "ofertaDoDia": false,
-    "flavors": [],
-    "extras": [],
+    "flavors": [
+
+    ],
+    "extras": [
+
+    ],
     "id": 6,
     "name": "Coxinha XL",
     "desc": "Coxinha XL 120g, crujiente por fuera, relleno cremoso",
@@ -941,14 +980,19 @@
       }
     ],
     "badgeTextColor": "#fcfcfc",
-    "productType": "combo"
+    "productType": "combo",
+    "slug": "coxinha-xl"
   },
   {
     "promo": null,
     "codigo": "BB-41556",
     "ofertaDoDia": false,
-    "flavors": [],
-    "extras": [],
+    "flavors": [
+
+    ],
+    "extras": [
+
+    ],
     "id": 7,
     "name": "Kibe frito XL 120g",
     "desc": "Kibe XL 120g, crujiente por fuera, jugoso por dentro",
@@ -971,16 +1015,23 @@
     "seoTitle": "Kibe frito en Pamplona | Crujiente y jugoso",
     "seoDesc": "Kibe frito XL 120g, crujiente por fuera y jugoso por dentro. Prueba este clásico en Pamplona. Pide fácil.",
     "seoKeywords": "kibe pamplona, kibbeh pamplona, comida brasileña pamplona, kibe frito, street food brasileño, comida árabe brasileña",
-    "variants": [],
+    "variants": [
+
+    ],
     "badgeTextColor": "",
-    "productType": "combo"
+    "productType": "combo",
+    "slug": "kibe-frito-xl-120g"
   },
   {
     "promo": null,
     "codigo": "BB-41558",
     "ofertaDoDia": false,
-    "flavors": [],
-    "extras": [],
+    "flavors": [
+
+    ],
+    "extras": [
+
+    ],
     "id": 8,
     "name": "Bolota de queso y orégano 120g",
     "desc": "Bolitas de queso con orégano, crujientes por fuera y cremosas por dentro",
@@ -1003,16 +1054,23 @@
     "seoTitle": "Bolota de queijo",
     "seoDesc": "Bolitas de queso con orégano, crujientes por fuera y cremosas por dentro. Pide en Pamplona y disfruta caliente.",
     "seoKeywords": "bolitas de queso pamplona, queso con oregano pamplona, queso frito pamplona, comida brasileña pamplona, snack de queso",
-    "variants": [],
+    "variants": [
+
+    ],
     "badgeTextColor": "",
-    "productType": "simple"
+    "productType": "simple",
+    "slug": "bolota-de-queso-y-oregano-120g"
   },
   {
     "promo": null,
     "codigo": "BB-87259",
     "ofertaDoDia": false,
-    "flavors": [],
-    "extras": [],
+    "flavors": [
+
+    ],
+    "extras": [
+
+    ],
     "id": 9,
     "name": "Trío mix de dulces brasileños",
     "desc": "1 brigadeiro + 1 beijinho + 1 de leche en polvo",
@@ -1025,23 +1083,32 @@
     "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/produtos/25_1776675622409.png",
     "menuVisible": true,
     "pairing": 16,
-    "addAlsoIds": [],
+    "addAlsoIds": [
+
+    ],
     "microcopy": "Ideal para probar",
     "badgeText": "Ahorro",
     "badgeColor": "#1A7A3C",
     "seoTitle": "Combo 3 dulces brasileños",
     "seoDesc": "Trío mix dulces brasileños en Pamplona",
     "seoKeywords": "Trío mix dulces brasileños en Pamplona",
-    "variants": [],
+    "variants": [
+
+    ],
     "badgeTextColor": "#ffffff",
-    "productType": "simple"
+    "productType": "simple",
+    "slug": "trio-mix-de-dulces-brasilenos"
   },
   {
     "promo": null,
     "codigo": "BB-41557",
     "ofertaDoDia": false,
-    "flavors": [],
-    "extras": [],
+    "flavors": [
+
+    ],
+    "extras": [
+
+    ],
     "id": 10,
     "name": "Trío de brigadeiros",
     "desc": "3 brigadeiros cremosos de chocolate, intensos y suaves",
@@ -1054,23 +1121,32 @@
     "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/produtos/24_1776675107574.png",
     "menuVisible": true,
     "pairing": 13,
-    "addAlsoIds": [],
+    "addAlsoIds": [
+
+    ],
     "microcopy": "Uno no basta",
     "badgeText": "",
     "badgeColor": "",
     "seoTitle": "Trío de brigadeiros en Pamplona | Dulce brasileño",
     "seoDesc": "3 brigadeiros cremosos de chocolate. Dulce brasileño irresistible en Pamplona. Pide fácil y date un capricho.",
     "seoKeywords": "brigadeiro pamplona, trio de brigadeiros, dulces brasileños pamplona, chocolate brasileño, postre pamplona",
-    "variants": [],
+    "variants": [
+
+    ],
     "badgeTextColor": "",
-    "productType": "simple"
+    "productType": "simple",
+    "slug": "trio-de-brigadeiros"
   },
   {
     "promo": null,
     "codigo": "BB-41557",
     "ofertaDoDia": false,
-    "flavors": [],
-    "extras": [],
+    "flavors": [
+
+    ],
+    "extras": [
+
+    ],
     "id": 1776675287258,
     "name": "Trío de brigadeiros de leche en polvo",
     "desc": "3 brigadeiros de leche en polvo, cremosos y suaves",
@@ -1083,23 +1159,32 @@
     "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/produtos/23_1776675307847.png",
     "menuVisible": true,
     "pairing": 15,
-    "addAlsoIds": [],
+    "addAlsoIds": [
+
+    ],
     "microcopy": "Suaves, cremosos y difíciles de olvidar",
     "badgeText": "",
     "badgeColor": "",
     "seoTitle": "Brigadeiros de leche en polvo en Pamplona | Trío",
     "seoDesc": "Trío de brigadeiros de leche en polvo, suaves y cremosos. Dulce brasileño diferente en Pamplona. Pide fácil.",
     "seoKeywords": "brigadeiro leche en polvo pamplona, dulces brasileños pamplona, brigadeiros caseros pamplona, postre brasileño pamplona",
-    "variants": [],
+    "variants": [
+
+    ],
     "badgeTextColor": "",
-    "productType": "simple"
+    "productType": "simple",
+    "slug": "trio-de-brigadeiros-de-leche-en-polvo"
   },
   {
     "promo": null,
     "codigo": "BB-87259",
     "ofertaDoDia": false,
-    "flavors": [],
-    "extras": [],
+    "flavors": [
+
+    ],
+    "extras": [
+
+    ],
     "id": 11,
     "name": "Trío de beijinho",
     "desc": "3 beijinhos de coco, suaves, cremosos y con sabor tropical",
@@ -1112,23 +1197,32 @@
     "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/produtos/22_1776675538702.png",
     "menuVisible": true,
     "pairing": 12,
-    "addAlsoIds": [],
+    "addAlsoIds": [
+
+    ],
     "microcopy": "Dulce de coco que se derrite",
     "badgeText": "",
     "badgeColor": "",
     "seoTitle": "Beijinho en Pamplona | Dulce de coco brasileño",
     "seoDesc": "Trío de beijinho, dulce brasileño de coco, suave y cremoso. Prueba algo diferente en Pamplona. Pide fácil.",
     "seoKeywords": "beijinho pamplona, dulce de coco brasileño, dulces brasileños pamplona, postre brasileño pamplona, coco dulce",
-    "variants": [],
+    "variants": [
+
+    ],
     "badgeTextColor": "",
-    "productType": "simple"
+    "productType": "simple",
+    "slug": "trio-de-beijinho"
   },
   {
     "promo": null,
     "codigo": "BB-87267",
     "ofertaDoDia": false,
-    "flavors": [],
-    "extras": [],
+    "flavors": [
+
+    ],
+    "extras": [
+
+    ],
     "id": 12,
     "name": "Bizcocho de chocolate y coco (Prestigio)",
     "desc": "Bizcocho de chocolate con relleno cremoso de coco, suave y intenso",
@@ -1141,23 +1235,32 @@
     "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/produtos/20_1776675808474.png",
     "menuVisible": true,
     "pairing": 11,
-    "addAlsoIds": [],
+    "addAlsoIds": [
+
+    ],
     "microcopy": "Chocolate y coco que se derriten juntos",
     "badgeText": "Top ventas",
     "badgeColor": "#c13506",
     "seoTitle": "Bizcocho chocolate y coco en Pamplona | Prestigio",
     "seoDesc": "Bizcocho de chocolate con coco cremoso. Dulce tipo Prestigio en Pamplona. Pide fácil y disfruta algo especial.",
     "seoKeywords": "bizcocho chocolate coco pamplona, pastel prestigio pamplona, dulces brasileños pamplona, postre chocolate coco, comida brasileña pamplona",
-    "variants": [],
+    "variants": [
+
+    ],
     "badgeTextColor": "#ffffff",
-    "productType": "simple"
+    "productType": "simple",
+    "slug": "bizcocho-de-chocolate-y-coco-prestigio"
   },
   {
     "promo": null,
     "codigo": "BB-87264",
     "ofertaDoDia": false,
-    "flavors": [],
-    "extras": [],
+    "flavors": [
+
+    ],
+    "extras": [
+
+    ],
     "id": 13,
     "name": "Bizcocho de zanahoria con chocolate",
     "desc": "Bizcocho de zanahoria con cobertura de chocolate + 1 brigadeiro",
@@ -1170,23 +1273,32 @@
     "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/produtos/19_1776675962202.png",
     "menuVisible": true,
     "pairing": 10,
-    "addAlsoIds": [],
+    "addAlsoIds": [
+
+    ],
     "microcopy": "Suave por dentro, chocolate por encima",
     "badgeText": "Favorito",
     "badgeColor": "#daae10",
     "seoTitle": "Bizcocho zanahoria con chocolate en Pamplona",
     "seoDesc": "Bizcocho de zanahoria con cobertura de chocolate + brigadeiro. Suave, cremoso y delicioso en Pamplona. Pide fácil.",
     "seoKeywords": "bizcocho zanahoria chocolate pamplona, carrot cake chocolate pamplona, dulces brasileños pamplona, postre zanahoria chocolate, brigadeiro pamplona",
-    "variants": [],
+    "variants": [
+
+    ],
     "badgeTextColor": "#fcfcfc",
-    "productType": "simple"
+    "productType": "simple",
+    "slug": "bizcocho-de-zanahoria-con-chocolate"
   },
   {
     "promo": null,
     "codigo": "BB-87263",
     "ofertaDoDia": false,
-    "flavors": [],
-    "extras": [],
+    "flavors": [
+
+    ],
+    "extras": [
+
+    ],
     "id": 14,
     "name": "Pão de queijo (10 unidades · 30g)",
     "desc": "10 unidades de pão de queijo (30g), crujiente por fuera y suave por dentro",
@@ -1229,14 +1341,19 @@
       }
     ],
     "badgeTextColor": "#ffffff",
-    "productType": "combo"
+    "productType": "combo",
+    "slug": "pao-de-queijo-10-unidades-30g"
   },
   {
     "promo": null,
     "codigo": "BB-00271",
     "ofertaDoDia": false,
-    "flavors": [],
-    "extras": [],
+    "flavors": [
+
+    ],
+    "extras": [
+
+    ],
     "id": 15,
     "name": "Pão de queijo con goiabada (10 unidades · 30g)",
     "desc": "10 unidades de pão de queijo con goiabada, dulce y salado en equilibrio",
@@ -1279,14 +1396,19 @@
       }
     ],
     "badgeTextColor": "",
-    "productType": "combo"
+    "productType": "combo",
+    "slug": "pao-de-queijo-con-goiabada-10-unidades-30g"
   },
   {
     "promo": null,
     "codigo": "BB-42505",
     "ofertaDoDia": false,
-    "flavors": [],
-    "extras": [],
+    "flavors": [
+
+    ],
+    "extras": [
+
+    ],
     "id": 16,
     "name": "Guaraná",
     "desc": "Refresco brasileño",
@@ -1299,23 +1421,32 @@
     "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/produtos/0b4dbec55ed48e8dba7c441719dc3c276bca5c32_1776677840885.jpeg",
     "menuVisible": true,
     "pairing": null,
-    "addAlsoIds": [],
+    "addAlsoIds": [
+
+    ],
     "microcopy": "El clásico brasileño",
     "badgeText": "Favorito",
     "badgeColor": "#daae10",
     "seoTitle": "Guaraná brasileño",
     "seoDesc": "Refresco típico de Brasil.",
     "seoKeywords": "guaraná",
-    "variants": [],
+    "variants": [
+
+    ],
     "badgeTextColor": "#fcfcfc",
-    "productType": "simple"
+    "productType": "simple",
+    "slug": "guarana"
   },
   {
     "promo": null,
     "codigo": "BB-42504",
     "ofertaDoDia": false,
-    "flavors": [],
-    "extras": [],
+    "flavors": [
+
+    ],
+    "extras": [
+
+    ],
     "id": 17,
     "name": "Zumo de maracuyá (350 ml)",
     "desc": "Zumo de maracuyá 350 ml, refrescante y con toque tropical",
@@ -1328,23 +1459,32 @@
     "img": "https://raw.githubusercontent.com/pcruzdigital-svg/bocadobrasil/main/images/produtos/Design_sem_nome__1__1776677871056.png",
     "menuVisible": true,
     "pairing": null,
-    "addAlsoIds": [],
+    "addAlsoIds": [
+
+    ],
     "microcopy": "Refresca y despierta el sabor",
     "badgeText": "",
     "badgeColor": "",
     "seoTitle": "Zumo de maracuyá",
     "seoDesc": "Bebida tropical natural.",
     "seoKeywords": "maracuyá",
-    "variants": [],
+    "variants": [
+
+    ],
     "badgeTextColor": "",
-    "productType": "simple"
+    "productType": "simple",
+    "slug": "zumo-de-maracuya-350-ml"
   },
   {
     "promo": null,
     "codigo": "BB-06813",
     "ofertaDoDia": false,
-    "flavors": [],
-    "extras": [],
+    "flavors": [
+
+    ],
+    "extras": [
+
+    ],
     "id": 1776590591958,
     "name": "Salsa de Guayaba",
     "desc": "Salsa de guayaba dulce y suave para acompañar",
@@ -1355,8 +1495,12 @@
     "menuVisible": true,
     "category": "complementos",
     "pairing": 6,
-    "addAlsoIds": [],
-    "variants": [],
+    "addAlsoIds": [
+
+    ],
+    "variants": [
+
+    ],
     "shortDesc": "Salsa de guayaba dulce y suave para acompañar",
     "fullDesc": "Salsa de guayaba de sabor dulce y equilibrado, ideal para acompañar coxinhas, pasteles o cualquier snack. Aporta un contraste suave que realza el sabor de cada bocado.",
     "seoTitle": "",
@@ -1366,14 +1510,19 @@
     "badgeText": "Top ventas",
     "badgeColor": "#c13506",
     "badgeTextColor": "#ffffff",
-    "productType": "simple"
+    "productType": "simple",
+    "slug": "salsa-de-guayaba"
   },
   {
     "promo": null,
     "codigo": "BB-06811",
     "ofertaDoDia": false,
-    "flavors": [],
-    "extras": [],
+    "flavors": [
+
+    ],
+    "extras": [
+
+    ],
     "id": 1776590702432,
     "name": "Salsa Alioli",
     "desc": "Salsa cremosa de ajo suave y equilibrada",
@@ -1384,8 +1533,12 @@
     "menuVisible": true,
     "category": "complementos",
     "pairing": 5,
-    "addAlsoIds": [],
-    "variants": [],
+    "addAlsoIds": [
+
+    ],
+    "variants": [
+
+    ],
     "shortDesc": "Salsa cremosa de ajo suave y equilibrada",
     "fullDesc": "Salsa alioli cremosa, con sabor a ajo suave y textura equilibrada. Ideal para acompañar coxinhas, pasteles y cualquier snack, aportando un toque sabroso sin ser intenso.",
     "seoTitle": "",
@@ -1395,14 +1548,19 @@
     "badgeText": "",
     "badgeColor": "",
     "badgeTextColor": "",
-    "productType": "simple"
+    "productType": "simple",
+    "slug": "salsa-alioli"
   },
   {
     "promo": null,
     "codigo": "BB-87266",
     "ofertaDoDia": false,
-    "flavors": [],
-    "extras": [],
+    "flavors": [
+
+    ],
+    "extras": [
+
+    ],
     "id": 1776676482058,
     "name": "+ 5 unidades",
     "desc": "",
@@ -1413,8 +1571,12 @@
     "menuVisible": false,
     "category": "pao-de-queijo",
     "pairing": null,
-    "addAlsoIds": [],
-    "variants": [],
+    "addAlsoIds": [
+
+    ],
+    "variants": [
+
+    ],
     "shortDesc": "",
     "fullDesc": "",
     "seoTitle": "",
@@ -1424,14 +1586,19 @@
     "badgeText": "",
     "badgeColor": "",
     "badgeTextColor": "",
-    "productType": "simple"
+    "productType": "simple",
+    "slug": "5-unidades"
   },
   {
     "promo": null,
     "codigo": "BB-82059",
     "ofertaDoDia": false,
-    "flavors": [],
-    "extras": [],
+    "flavors": [
+
+    ],
+    "extras": [
+
+    ],
     "id": 1776676500262,
     "name": "+ 10 unidades",
     "desc": "",
@@ -1442,8 +1609,12 @@
     "menuVisible": false,
     "category": "pao-de-queijo",
     "pairing": null,
-    "addAlsoIds": [],
-    "variants": [],
+    "addAlsoIds": [
+
+    ],
+    "variants": [
+
+    ],
     "shortDesc": "",
     "fullDesc": "",
     "seoTitle": "",
@@ -1453,14 +1624,19 @@
     "badgeText": "",
     "badgeColor": "",
     "badgeTextColor": "",
-    "productType": "simple"
+    "productType": "simple",
+    "slug": "10-unidades"
   },
   {
     "promo": null,
     "codigo": "BB-87266",
     "ofertaDoDia": false,
-    "flavors": [],
-    "extras": [],
+    "flavors": [
+
+    ],
+    "extras": [
+
+    ],
     "id": 1776677341162,
     "name": "+ 5 unidades - con guayaba",
     "desc": "",
@@ -1471,8 +1647,12 @@
     "menuVisible": false,
     "category": "pao-de-queijo",
     "pairing": null,
-    "addAlsoIds": [],
-    "variants": [],
+    "addAlsoIds": [
+
+    ],
+    "variants": [
+
+    ],
     "shortDesc": "",
     "fullDesc": "",
     "seoTitle": "",
@@ -1482,14 +1662,19 @@
     "badgeText": "",
     "badgeColor": "",
     "badgeTextColor": "",
-    "productType": "simple"
+    "productType": "simple",
+    "slug": "5-unidades-con-guayaba"
   },
   {
     "promo": null,
     "codigo": "BB-87266",
     "ofertaDoDia": false,
-    "flavors": [],
-    "extras": [],
+    "flavors": [
+
+    ],
+    "extras": [
+
+    ],
     "id": 1776677342498,
     "name": "+ 10 unidades - con guayaba",
     "desc": "",
@@ -1500,8 +1685,12 @@
     "menuVisible": false,
     "category": "pao-de-queijo",
     "pairing": null,
-    "addAlsoIds": [],
-    "variants": [],
+    "addAlsoIds": [
+
+    ],
+    "variants": [
+
+    ],
     "shortDesc": "",
     "fullDesc": "",
     "seoTitle": "",
@@ -1511,6 +1700,7 @@
     "badgeText": "",
     "badgeColor": "",
     "badgeTextColor": "",
-    "productType": "simple"
+    "productType": "simple",
+    "slug": "10-unidades-con-guayaba"
   }
 ]
