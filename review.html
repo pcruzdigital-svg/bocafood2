@@ -10,6 +10,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@700;800;900&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -146,10 +148,24 @@ header{background:var(--white);border-bottom:1px solid var(--gray-light);box-sha
 
 <script>
 // Phone injected at publish time — fallback is the default number
-const WA_PHONE=/*[[BOCA_PHONE]]*/'34611878234'/*[[BOCA_PHONE_END]]*/;
+let WA_PHONE=/*[[BOCA_PHONE]]*/'34611878234'/*[[BOCA_PHONE_END]]*/;
 const CFG_KEY='bocadoBrasilConfig';
 const SUBMITTED_KEY='bocadoBrasilReviewSubmitted';
 const STAR_HINTS=['','¡Muy malo!','Podría mejorar','Está bien','¡Muy bueno!','¡Excelente!'];
+const BB_FB_CFG={apiKey:'AIzaSyAZk2mEPXR-VQOOEJWfcdhqoJOhHWjzda4',authDomain:'bocado-brasil.firebaseapp.com',projectId:'bocado-brasil',storageBucket:'bocado-brasil.firebasestorage.app',messagingSenderId:'1083383234261',appId:'1:1083383234261:web:b73a9e9f7df73233d6ec5c'};
+firebase.initializeApp(BB_FB_CFG);
+const db=firebase.firestore();
+var PUBLISHED_TENANT_ID="c7BL3Fz9jmcfKkao2Osth9sROEi1";
+function tenantIdFromUrl(){
+  const params=new URLSearchParams(window.location.search);
+  return params.get('tenant')||params.get('tenantId')||params.get('uid')||window.PUBLISHED_TENANT_ID||PUBLISHED_TENANT_ID||'';
+}
+const TENANT_ID=tenantIdFromUrl();
+function tenantCollection(name){return TENANT_ID?db.collection('tenants').doc(TENANT_ID).collection(name):db.collection(name);}
+function tenantConfigDoc(id){return TENANT_ID?db.collection('tenants').doc(TENANT_ID).collection('config').doc(id):db.collection('config').doc(id);}
+if(TENANT_ID){
+  document.querySelectorAll('a[href="index.html"]').forEach(a=>{a.href='index.html?tenant='+encodeURIComponent(TENANT_ID);});
+}
 
 let selectedStars=0;
 let siteProd=[];
@@ -181,6 +197,35 @@ if(siteProd.length>0){
   });
   document.getElementById('product-group').style.display='block';
 }
+
+async function loadTenantReviewContext(){
+  if(!TENANT_ID)return;
+  try{
+    const [geralSnap,integracoesSnap,productsSnap]=await Promise.all([
+      tenantConfigDoc('geral').get(),
+      tenantConfigDoc('integracoes').get(),
+      tenantCollection('products').get()
+    ]);
+    const geral=geralSnap.exists?geralSnap.data():{};
+    const integracoes=integracoesSnap.exists?integracoesSnap.data():{};
+    if(geral.faviconUrl){const fv=document.getElementById('site-favicon');if(fv)fv.href=geral.faviconUrl;}
+    if(geral.logoUrl){logoImg.src=geral.logoUrl;logoImg.style.display='block';document.getElementById('logo-fallback').style.display='none';}
+    if(integracoes.whatsapp)WA_PHONE=String(integracoes.whatsapp).replace(/\D/g,'')||WA_PHONE;
+    const rows=productsSnap.docs.map(d=>({id:d.id,...d.data()})).filter(p=>p.menuVisible!==false&&p.visible!==false);
+    if(rows.length){
+      siteProd=rows;
+      const sel=document.getElementById('r-product');
+      sel.innerHTML='<option value="">— Seleccionar producto —</option>';
+      siteProd.forEach(p=>{
+        const opt=document.createElement('option');
+        opt.value=p.id; opt.textContent=p.name||p.title||'Produto';
+        sel.appendChild(opt);
+      });
+      document.getElementById('product-group').style.display='block';
+    }
+  }catch(e){console.warn('tenant review context',e);}
+}
+loadTenantReviewContext();
 
 // Prevent re-submission from same device
 if(localStorage.getItem(SUBMITTED_KEY)){
@@ -216,6 +261,19 @@ function submitReview(){
   if(productName) msg+=`🍽️ Producto: ${productName}\n`;
   msg+=`💬 Comentario:\n"${comment}"\n\n`;
   msg+=`📅 Fecha: ${new Date().toLocaleDateString('es-ES')}`;
+
+  tenantCollection('reviews').add({
+    name,
+    comment,
+    stars:selectedStars,
+    productId:productId||null,
+    productName,
+    status:'pending',
+    approved:false,
+    rejected:false,
+    source:'public-review',
+    createdAt:firebase.firestore.FieldValue.serverTimestamp()
+  }).catch(e=>console.warn('review save',e));
 
   // Open WhatsApp
   setTimeout(()=>{window.open('https://wa.me/'+WA_PHONE+'?text='+encodeURIComponent(msg),'_blank');},300);
