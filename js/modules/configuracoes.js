@@ -9,19 +9,18 @@ Modules.Configuracoes = (function () {
   var _editingUnidadeId = null;
   var _fornecedores = [];
   var _editingFornecedorId = null;
+  var _usuarios = [];
+  var _editingUsuarioId = null;
 
   var TABS = [
     { key: 'geral', label: 'Geral' },
-    { key: 'produtos', label: 'Produtos' },
     { key: 'dominio', label: 'Domínio / URL' },
-    { key: 'pagamentos', label: 'Pagamentos' },
-    { key: 'endereco', label: 'Endereço' },
     { key: 'integracoes', label: 'Integrações' },
-    { key: 'seo', label: 'SEO' },
-    { key: 'template', label: 'Template da loja' }
+    { key: 'usuarios', label: 'Usuários / permissões' },
+    { key: 'aparencia', label: 'Aparência' }
   ];
 
-  var CONFIG_TABS = ['geral', 'dominio', 'pagamentos', 'endereco', 'integracoes', 'seo', 'template'];
+  var CONFIG_TABS = ['geral', 'dominio', 'integracoes', 'usuarios', 'aparencia', 'pagamentos', 'endereco', 'seo', 'template'];
 
   var DEFAULT_UNIDADES = [
     { name: 'Quilograma', symbol: 'kg', type: 'massa' },
@@ -74,11 +73,13 @@ Modules.Configuracoes = (function () {
 
   function _renderSub() {
     if (_activeSub === 'geral') return _renderGeral();
-    if (_activeSub === 'produtos') return _renderProdutos();
+    if (_activeSub === 'produtos') { _activeSub = 'geral'; _renderTabs(); return _renderGeral(); }
     if (_activeSub === 'dominio') return _renderDominio();
+    if (_activeSub === 'integracoes') return _renderIntegracoes();
+    if (_activeSub === 'usuarios') return _renderUsuarios();
+    if (_activeSub === 'aparencia') return _renderAparencia();
     if (_activeSub === 'pagamentos') return _renderPagamentos();
     if (_activeSub === 'endereco') return _renderEndereco();
-    if (_activeSub === 'integracoes') return _renderIntegracoes();
     if (_activeSub === 'seo') return _renderSeo();
     if (_activeSub === 'template') return _renderTemplate();
   }
@@ -91,21 +92,274 @@ Modules.Configuracoes = (function () {
     return '<label class="field"><span>' + label + '</span><textarea id="' + id + '" placeholder="' + (placeholder || '') + '">' + _esc(value || '') + '</textarea></label>';
   }
 
+  function _appearanceState() {
+    window._appearanceImageState = window._appearanceImageState || {};
+    return window._appearanceImageState;
+  }
+
+  function _appearanceDraftId(kind) {
+    return 'appearance-' + (kind || 'image');
+  }
+
+  function _appearanceTip(kind) {
+    if (kind === 'banner') {
+      return 'Aceita JPG, JPEG, PNG ou WebP. O sistema ajusta para 1200x600 px e otimiza em WebP. Se não subir, o motivo aparece na mensagem do sistema.';
+    }
+    return 'Aceita JPG, JPEG, PNG ou WebP. O sistema ajusta para 500x500 px e otimiza em WebP. Se não subir, o motivo aparece na mensagem do sistema.';
+  }
+
+  function _uploadAppearanceImage(event, kind) {
+    var file = event && event.target && event.target.files ? event.target.files[0] : null;
+    if (!file) return;
+    var targetKind = kind === 'banner' ? 'banner' : 'logo';
+    var draftId = _appearanceDraftId(targetKind);
+    ImageTools.process(file, { kind: targetKind, entityId: draftId }).then(function (result) {
+      var state = _appearanceState();
+      state[targetKind] = result;
+      var field = document.getElementById(targetKind === 'logo' ? 'app-logo-url' : 'app-banner-url');
+      if (field) field.value = result.imageUrl || '';
+      var preview = document.getElementById(targetKind === 'logo' ? 'appearance-logo-preview' : 'appearance-banner-preview');
+      if (preview) {
+        preview.src = result.imageUrl || '';
+        preview.style.display = 'block';
+      }
+      UI.toast('Imagem otimizada com sucesso.', 'success');
+    }).catch(function (err) {
+      console.error('Upload de imagem da aparência', err);
+      UI.toast(err && err.message ? err.message : 'Erro ao otimizar imagem.', 'error');
+      if (event && event.target) event.target.value = '';
+    });
+  }
+
   function _renderGeral() {
     var c = _config.geral || {};
-    _paint('Geral', 'Identidade visual usada pelo site publicado e pelos pedidos.', [
+    _paint('Geral', 'Dados básicos do negócio usados pelo painel e pelo site.', [
       _field('cfg-business-name', 'Nome do negócio', c.businessName, 'Boca do Brasil'),
-      _field('cfg-logo-url', 'Logo', c.logoUrl, 'https://...'),
-      _field('cfg-favicon-url', 'Favicon', c.faviconUrl, 'https://...'),
-      _field('cfg-primary-color', 'Cor principal', c.primaryColor || '#C4362A', '#C4362A'),
-      _textarea('cfg-description', 'Descrição curta', c.description, 'Comida brasileira artesanal em Lisboa')
+      _textarea('cfg-description', 'Descrição curta', c.description, 'Comida brasileira artesanal em Lisboa'),
+      _field('cfg-whatsapp', 'Telefone / WhatsApp', c.whatsapp || c.phone, '+351...'),
+      _field('cfg-email', 'E-mail', c.email, 'contato@...'),
+      _field('cfg-country', 'País', c.country, 'Portugal'),
+      _field('cfg-city', 'Cidade', c.city, 'Lisboa'),
+      _field('cfg-language', 'Idioma padrão', c.language || c.defaultLanguage, 'pt-PT'),
+      _field('cfg-currency', 'Moeda', c.currency || c.defaultCurrency, 'EUR')
     ].join(''), function () {
       return {
         businessName: _val('cfg-business-name'),
-        logoUrl: _val('cfg-logo-url'),
-        faviconUrl: _val('cfg-favicon-url'),
-        primaryColor: _val('cfg-primary-color') || '#C4362A',
-        description: _val('cfg-description')
+        description: _val('cfg-description'),
+        whatsapp: _val('cfg-whatsapp'),
+        phone: _val('cfg-whatsapp'),
+        email: _val('cfg-email'),
+        country: _val('cfg-country'),
+        city: _val('cfg-city'),
+        language: _val('cfg-language'),
+        defaultLanguage: _val('cfg-language'),
+        currency: _val('cfg-currency'),
+        defaultCurrency: _val('cfg-currency'),
+        indirectCostMode: c.indirectCostMode,
+        custosIndiretosModo: c.custosIndiretosModo,
+        indirectCostPercent: c.indirectCostPercent,
+        percentualCustosIndiretos: c.percentualCustosIndiretos,
+        indirectCostMonths: c.indirectCostMonths,
+        custosIndiretosMeses: c.custosIndiretosMeses,
+        logoUrl: c.logoUrl,
+        faviconUrl: c.faviconUrl,
+        primaryColor: c.primaryColor,
+        secondaryColor: c.secondaryColor,
+        bannerUrl: c.bannerUrl,
+        visualName: c.visualName
+      };
+    });
+  }
+
+  function _renderAparencia() {
+    var c = _config.aparencia || _config.geral || {};
+    _paint('Aparência', 'Identidade visual do painel e da loja publicada.', [
+      '<div style="background:#FBF5F3;border:1px solid #F2EDED;border-radius:14px;padding:16px;margin-bottom:14px;">' +
+        '<div style="font-size:12px;font-weight:800;color:#8A7E7C;text-transform:uppercase;margin-bottom:6px;">Pré-visualização</div>' +
+        '<div style="display:flex;flex-direction:column;gap:10px;">' +
+          '<div style="display:flex;align-items:center;gap:12px;">' +
+            '<div style="width:56px;height:56px;border-radius:14px;background:#fff;border:1px solid #EEE6E4;display:flex;align-items:center;justify-content:center;overflow:hidden;"><img id="appearance-logo-preview" src="' + _esc(c.logoUrl || _config.geral.logoUrl || '') + '" alt="" style="max-width:100%;max-height:100%;object-fit:contain;"></div>' +
+            '<div style="min-width:0;">' +
+              '<div style="font-size:16px;font-weight:900;">' + _esc(c.visualName || _config.geral.businessName || 'Nome visual da loja') + '</div>' +
+              '<div style="font-size:12px;color:#8A7E7C;margin-top:3px;">' + _esc(c.primaryColor || _config.geral.primaryColor || '#C4362A') + ' · ' + _esc(c.secondaryColor || '#1A1A1A') + '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div style="width:100%;height:92px;border-radius:14px;background:#fff;border:1px solid #EEE6E4;overflow:hidden;"><img id="appearance-banner-preview" src="' + _esc(c.bannerUrl || _config.geral.bannerUrl || '') + '" alt="" style="width:100%;height:100%;object-fit:cover;display:block;"></div>' +
+        '</div>' +
+      '</div>',
+      _field('app-visual-name', 'Nome visual da loja', c.visualName || _config.geral.visualName || _config.geral.businessName, 'Boca do Brasil'),
+      '<div class="field"><span>Logo</span><input type="file" accept="image/jpeg,image/jpg,image/png,image/webp" onchange="Modules.Configuracoes._uploadAppearanceImage(event,\'logo\')" style="width:100%;padding:11px 12px;border:1.5px solid #D4C8C6;border-radius:10px;background:#fff;font-size:14px;"><div style="margin-top:6px;font-size:11px;line-height:1.45;color:#8A7E7C;">' + _appearanceTip('logo') + '</div></div>',
+      _field('app-logo-url', 'Logo', c.logoUrl || _config.geral.logoUrl, 'https://...'),
+      '<div class="field"><span>Banner</span><input type="file" accept="image/jpeg,image/jpg,image/png,image/webp" onchange="Modules.Configuracoes._uploadAppearanceImage(event,\'banner\')" style="width:100%;padding:11px 12px;border:1.5px solid #D4C8C6;border-radius:10px;background:#fff;font-size:14px;"><div style="margin-top:6px;font-size:11px;line-height:1.45;color:#8A7E7C;">' + _appearanceTip('banner') + '</div></div>',
+      _field('app-favicon-url', 'Favicon', c.faviconUrl || _config.geral.faviconUrl, 'https://...'),
+      _field('app-primary-color', 'Cor principal', c.primaryColor || _config.geral.primaryColor || '#C4362A', '#C4362A'),
+      _field('app-secondary-color', 'Cor secundária', c.secondaryColor || _config.geral.secondaryColor || '#1A1A1A', '#1A1A1A'),
+      _field('app-banner-url', 'Imagem de capa / banner', c.bannerUrl || _config.geral.bannerUrl, 'https://...'),
+      _textarea('app-notes', 'Observação interna', c.notes || '', 'Apenas para referência do time')
+    ].join(''), function () {
+      var data = {
+        visualName: _val('app-visual-name'),
+        logoUrl: _val('app-logo-url'),
+        faviconUrl: _val('app-favicon-url'),
+        primaryColor: _val('app-primary-color') || '#C4362A',
+        secondaryColor: _val('app-secondary-color') || '#1A1A1A',
+        bannerUrl: _val('app-banner-url'),
+        notes: _val('app-notes')
+      };
+      return data;
+    });
+  }
+
+  function _renderUsuarios() {
+    var c = _config.usuarios || {};
+    _usuarios = Array.isArray(c.list) ? c.list : (Array.isArray(c.users) ? c.users : []);
+    var empty = _usuarios.length === 0;
+    var rows = empty ? '<div style="padding:24px;border:1px dashed #E4D9D6;border-radius:14px;background:#FBF5F3;color:#8A7E7C;text-align:center;">Em breve você poderá convidar usuários e controlar permissões.</div>' : '<div style="overflow-x:auto;"><table style="width:100%;border-collapse:collapse;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.05);"><thead><tr style="background:#F2EDED;">' +
+      ['Nome', 'Perfil', 'E-mail', 'Permissões', ''].map(function (h) {
+        return '<th style="padding:11px 14px;text-align:left;font-size:11px;font-weight:700;color:#8A7E7C;text-transform:uppercase;">' + h + '</th>';
+      }).join('') + '</tr></thead><tbody>' +
+      _usuarios.map(function (u) {
+        return '<tr style="border-top:1px solid #F2EDED;">' +
+          '<td style="padding:11px 14px;font-size:13px;font-weight:700;">' + _esc(u.name || u.nome || '-') + '</td>' +
+          '<td style="padding:11px 14px;font-size:13px;">' + _esc(u.role || u.perfil || '—') + '</td>' +
+          '<td style="padding:11px 14px;font-size:13px;">' + _esc(u.email || '-') + '</td>' +
+          '<td style="padding:11px 14px;font-size:12px;color:#8A7E7C;">' + _esc((u.permissions || []).join(', ') || '—') + '</td>' +
+          '<td style="padding:11px 8px;text-align:right;"><button onclick="Modules.Configuracoes._openUsuarioModal(\'' + (u.id || '') + '\')" style="width:28px;height:28px;border-radius:7px;border:none;background:#EEF4FF;color:#3B82F6;cursor:pointer;margin-right:4px;"><span class="mi" style="font-size:14px;">edit</span></button><button onclick="Modules.Configuracoes._deleteUsuario(\'' + (u.id || '') + '\')" style="width:28px;height:28px;border-radius:7px;border:none;background:#FFF0EE;color:#C4362A;cursor:pointer;"><span class="mi" style="font-size:14px;">delete</span></button></td>' +
+        '</tr>';
+      }).join('') + '</tbody></table></div>';
+
+    _paint('Usuários / permissões', 'Gestão de acessos preparada para futura integração com autenticação.', [
+      '<div style="background:#FBF5F3;border:1px solid #F2EDED;border-radius:14px;padding:16px;margin-bottom:14px;">' +
+        '<div style="font-size:12px;font-weight:800;color:#8A7E7C;text-transform:uppercase;margin-bottom:6px;">Gestão de usuários e permissões</div>' +
+        '<div style="font-size:13px;color:#6B635F;line-height:1.5;">Defina perfis de acesso por área do painel. A regra de login pode continuar igual por enquanto.</div>' +
+      '</div>',
+      '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;gap:12px;flex-wrap:wrap;"><div><h3 style="font-size:15px;font-weight:700;margin-bottom:4px;">Usuários</h3><p style="font-size:12px;color:#8A7E7C;">Perfis previstos para o painel.</p></div><button onclick="Modules.Configuracoes._openUsuarioModal(null)" style="background:#C4362A;color:#fff;border:none;padding:9px 16px;border-radius:20px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;">+ Adicionar usuário</button></div>' +
+      rows
+    ].join(''), function () { return { list: _usuarios.slice() }; });
+  }
+
+  function _openUsuarioModal(id) {
+    _editingUsuarioId = id;
+    var list = _usuarios || [];
+    var u = id ? (list.find(function (x) { return String(x.id || '') === String(id); }) || {}) : {};
+    var perms = {
+      'Ver pedidos': false,
+      'Editar pedidos': false,
+      'Ver financeiro': false,
+      'Editar financeiro': false,
+      'Editar cardápio': false,
+      'Editar configurações': false
+    };
+    (u.permissions || []).forEach(function (p) { if (perms.hasOwnProperty(p)) perms[p] = true; });
+    var body = '<div>' +
+      _field('usr-name', 'Nome', u.name || u.nome || '', 'Nome do usuário') +
+      _field('usr-email', 'E-mail', u.email || '', 'usuario@...') +
+      '<label class="field"><span>Perfil</span><select id="usr-role">' +
+        ['Dono', 'Administrador', 'Operação', 'Financeiro', 'Atendimento'].map(function (r) {
+          return '<option value="' + r + '"' + ((u.role || u.perfil || '') === r ? ' selected' : '') + '>' + r + '</option>';
+        }).join('') +
+      '</select></label>' +
+      '<div style="font-size:11px;font-weight:800;color:#8A7E7C;text-transform:uppercase;margin:4px 0 8px;">Permissões</div>' +
+      '<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;">' +
+        Object.keys(perms).map(function (label) {
+          var idSafe = 'perm-' + label.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+          return '<label style="display:flex;align-items:center;gap:8px;padding:10px 12px;border:1px solid #EEE6E4;border-radius:12px;background:' + (perms[label] ? '#EDFAF3' : '#fff') + ';">' +
+            '<input id="' + idSafe + '" type="checkbox" ' + (perms[label] ? 'checked' : '') + ' style="accent-color:#C4362A;width:16px;height:16px;">' +
+            '<span style="font-size:12px;font-weight:700;">' + label + '</span>' +
+          '</label>';
+        }).join('') +
+      '</div>' +
+      '</div>';
+    var footer = '<button onclick="Modules.Configuracoes._saveUsuario()" style="width:100%;padding:13px;border-radius:11px;border:none;background:#C4362A;color:#fff;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;">Salvar usuário</button>';
+    window._usuarioCfgModal = UI.modal({ title: id ? 'Editar usuário' : 'Adicionar usuário', body: body, footer: footer });
+  }
+
+  function _saveUsuario() {
+    var name = _val('usr-name');
+    var email = _val('usr-email');
+    if (!name) { UI.toast('Nome obrigatório', 'error'); return; }
+    var permissionLabels = ['Ver pedidos', 'Editar pedidos', 'Ver financeiro', 'Editar financeiro', 'Editar cardápio', 'Editar configurações'];
+    var permissions = permissionLabels.filter(function (label) {
+      var idSafe = 'perm-' + label.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+      return _checked(idSafe);
+    });
+    var data = {
+      name: name,
+      email: email,
+      role: (document.getElementById('usr-role') || {}).value || 'Administrador',
+      permissions: permissions,
+      updatedAt: new Date().toISOString()
+    };
+    if (!_editingUsuarioId) data.createdAt = new Date().toISOString();
+    var next = _usuarios.slice();
+    if (_editingUsuarioId) {
+      var idx = next.findIndex(function (x) { return String(x.id || '') === String(_editingUsuarioId); });
+      if (idx >= 0) next[idx] = Object.assign({}, next[idx], data);
+    } else {
+      data.id = 'usr-' + Date.now().toString(36);
+      next.push(data);
+    }
+    DB.setDocRoot('config', 'usuarios', { list: next }).then(function () {
+      _config.usuarios = { list: next };
+      _usuarios = next;
+      if (window._usuarioCfgModal) window._usuarioCfgModal.close();
+      UI.toast('Usuário salvo', 'success');
+      _renderUsuarios();
+    }).catch(function (err) { UI.toast('Erro: ' + err.message, 'error'); });
+  }
+
+  function _deleteUsuario(id) {
+    UI.confirm('Eliminar este usuário?').then(function (yes) {
+      if (!yes) return;
+      var next = _usuarios.filter(function (u) { return String(u.id || '') !== String(id); });
+      DB.setDocRoot('config', 'usuarios', { list: next }).then(function () {
+        _usuarios = next;
+        _config.usuarios = { list: next };
+        UI.toast('Usuário removido', 'info');
+        _renderUsuarios();
+      });
+    });
+  }
+
+  function _renderAparencia() {
+    var c = _config.aparencia || _config.geral || {};
+    _paint('Aparência', 'Identidade visual do painel e da loja publicada.', [
+      '<div style="background:#FBF5F3;border:1px solid #F2EDED;border-radius:14px;padding:16px;margin-bottom:14px;">' +
+        '<div style="font-size:12px;font-weight:800;color:#8A7E7C;text-transform:uppercase;margin-bottom:6px;">Pré-visualização</div>' +
+        '<div style="display:flex;align-items:center;gap:12px;">' +
+          '<div style="width:56px;height:56px;border-radius:14px;background:#fff;border:1px solid #EEE6E4;display:flex;align-items:center;justify-content:center;overflow:hidden;"><img src="' + _esc(c.logoUrl || _config.geral.logoUrl || '') + '" alt="" style="max-width:100%;max-height:100%;object-fit:contain;"></div>' +
+          '<div style="min-width:0;">' +
+            '<div style="font-size:16px;font-weight:900;">' + _esc(c.visualName || _config.geral.businessName || 'Nome visual da loja') + '</div>' +
+            '<div style="font-size:12px;color:#8A7E7C;margin-top:3px;">' + _esc(c.primaryColor || _config.geral.primaryColor || '#C4362A') + ' · ' + _esc(c.secondaryColor || '#1A1A1A') + '</div>' +
+          '</div>' +
+        '</div>' +
+      '</div>',
+      _field('app-visual-name', 'Nome visual da loja', c.visualName || _config.geral.visualName || _config.geral.businessName, 'Boca do Brasil'),
+      _field('app-logo-url', 'Logo', c.logoUrl || _config.geral.logoUrl, 'https://...'),
+      _field('app-favicon-url', 'Favicon', c.faviconUrl || _config.geral.faviconUrl, 'https://...'),
+      _field('app-primary-color', 'Cor principal', c.primaryColor || _config.geral.primaryColor || '#C4362A', '#C4362A'),
+      _field('app-secondary-color', 'Cor secundária', c.secondaryColor || _config.geral.secondaryColor || '#1A1A1A', '#1A1A1A'),
+      _field('app-banner-url', 'Imagem de capa / banner', c.bannerUrl || _config.geral.bannerUrl, 'https://...'),
+      _textarea('app-notes', 'Observação interna', c.notes || '', 'Apenas para referência do time')
+    ].join(''), function () {
+      return {
+        visualName: _val('app-visual-name'),
+        logoUrl: _val('app-logo-url'),
+        faviconUrl: _val('app-favicon-url'),
+        primaryColor: _val('app-primary-color') || '#C4362A',
+        secondaryColor: _val('app-secondary-color') || '#1A1A1A',
+        bannerUrl: _val('app-banner-url'),
+        logoStoragePath: _appearanceState().logo && _appearanceState().logo.imageStoragePath ? _appearanceState().logo.imageStoragePath : c.logoStoragePath,
+        logoWidth: _appearanceState().logo && _appearanceState().logo.imageWidth ? _appearanceState().logo.imageWidth : c.logoWidth,
+        logoHeight: _appearanceState().logo && _appearanceState().logo.imageHeight ? _appearanceState().logo.imageHeight : c.logoHeight,
+        logoSizeKb: _appearanceState().logo && _appearanceState().logo.imageSizeKb ? _appearanceState().logo.imageSizeKb : c.logoSizeKb,
+        logoFormat: _appearanceState().logo && _appearanceState().logo.imageFormat ? _appearanceState().logo.imageFormat : c.logoFormat,
+        bannerStoragePath: _appearanceState().banner && _appearanceState().banner.imageStoragePath ? _appearanceState().banner.imageStoragePath : c.bannerStoragePath,
+        bannerWidth: _appearanceState().banner && _appearanceState().banner.imageWidth ? _appearanceState().banner.imageWidth : c.bannerWidth,
+        bannerHeight: _appearanceState().banner && _appearanceState().banner.imageHeight ? _appearanceState().banner.imageHeight : c.bannerHeight,
+        bannerSizeKb: _appearanceState().banner && _appearanceState().banner.imageSizeKb ? _appearanceState().banner.imageSizeKb : c.bannerSizeKb,
+        bannerFormat: _appearanceState().banner && _appearanceState().banner.imageFormat ? _appearanceState().banner.imageFormat : c.bannerFormat,
+        notes: _val('app-notes')
       };
     });
   }
@@ -146,7 +400,7 @@ Modules.Configuracoes = (function () {
     var typeLabel = { massa: 'Massa', volume: 'Volume', unidade: 'Unidade' };
 
     content.innerHTML = '<div class="settings-card">' +
-      '<div class="settings-card-head"><h2>Produtos</h2><p>Configurações relacionadas ao catálogo de produtos.</p></div>' +
+      '<div class="settings-card-head"><h2>Produtos</h2><p>Configurações relacionadas ao cardápio de produtos.</p></div>' +
       '<div style="margin-top:16px;">' +
       '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">' +
       '<div>' +
@@ -413,6 +667,67 @@ Modules.Configuracoes = (function () {
     });
   }
 
+  function _renderCanaisVenda() {
+    var c = _config.canais_venda || {};
+    var list = Array.isArray(c.list) ? c.list : [
+      { name: 'Loja própria', commissionPct: 0, fixedFee: 0, taxPct: 0, minMarginPct: 40, differentPrice: false },
+      { name: 'WhatsApp', commissionPct: 0, fixedFee: 0, taxPct: 0, minMarginPct: 40, differentPrice: false },
+      { name: 'Marketplace', commissionPct: 25, fixedFee: 0, taxPct: 0, minMarginPct: 45, differentPrice: true }
+    ];
+    var rows = list.map(function (ch, idx) {
+      return '<div class="channel-row" data-channel-row="' + idx + '" style="grid-column:1/-1;display:grid;grid-template-columns:1.4fr .8fr .8fr .8fr .9fr .8fr 34px;gap:10px;align-items:end;background:#F8F6F5;border-radius:12px;padding:12px;">' +
+        _field('ch-name-' + idx, 'Canal', ch.name || '', 'WhatsApp') +
+        _field('ch-commission-' + idx, 'Comissão %', ch.commissionPct || 0, '0', 'number') +
+        _field('ch-fixed-' + idx, 'Taxa fixa', ch.fixedFee || 0, '0', 'number') +
+        _field('ch-tax-' + idx, 'Imposto %', ch.taxPct || 0, '0', 'number') +
+        _field('ch-margin-' + idx, 'Margem mínima %', ch.minMarginPct || 0, '40', 'number') +
+        '<label class="check-row" style="grid-column:auto;margin:0;padding:10px;background:#fff;border-radius:10px;"><input id="ch-price-' + idx + '" type="checkbox"' + (ch.differentPrice ? ' checked' : '') + '><span>Preço diferente</span></label>' +
+        '<button type="button" onclick="Modules.Configuracoes._removeCanalVenda(' + idx + ')" title="Remover canal" style="height:38px;border:none;border-radius:9px;background:#FFF0EE;color:#C4362A;cursor:pointer;font-weight:800;">×</button>' +
+      '</div>';
+    }).join('');
+    var content = document.getElementById('config-content');
+    content.innerHTML = '<div class="settings-card">' +
+      '<div class="settings-card-head"><h2>Canais de venda</h2><p>Taxas e margens usadas pelo menu Dinheiro para calcular impacto por canal.</p></div>' +
+      '<div id="channels-list" class="settings-grid">' + rows + '</div>' +
+      '<div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap;"><button class="secondary-action" type="button" onclick="Modules.Configuracoes._addCanalVenda()">+ Adicionar canal</button><button class="primary-action" type="button" onclick="Modules.Configuracoes._saveCanaisVenda()">Salvar canais</button></div>' +
+      '</div>';
+  }
+
+  function _collectCanaisVenda() {
+    return [].slice.call(document.querySelectorAll('[data-channel-row]')).map(function (row) {
+      var idx = row.dataset.channelRow;
+      return {
+        name: _val('ch-name-' + idx),
+        commissionPct: parseFloat(String(_val('ch-commission-' + idx) || '0').replace(',', '.')) || 0,
+        fixedFee: parseFloat(String(_val('ch-fixed-' + idx) || '0').replace(',', '.')) || 0,
+        taxPct: parseFloat(String(_val('ch-tax-' + idx) || '0').replace(',', '.')) || 0,
+        minMarginPct: parseFloat(String(_val('ch-margin-' + idx) || '0').replace(',', '.')) || 0,
+        differentPrice: _checked('ch-price-' + idx)
+      };
+    }).filter(function (ch) { return !!ch.name; });
+  }
+
+  function _saveCanaisVenda() {
+    var data = { list: _collectCanaisVenda() };
+    DB.setDocRoot('config', 'canais_venda', data).then(function () {
+      _config.canais_venda = data;
+      UI.toast('Canais salvos', 'success');
+      _renderCanaisVenda();
+    }).catch(function (err) { UI.toast('Erro: ' + err.message, 'error'); });
+  }
+
+  function _addCanalVenda() {
+    _config.canais_venda = { list: _collectCanaisVenda().concat([{ name: '', commissionPct: 0, fixedFee: 0, taxPct: 0, minMarginPct: 40, differentPrice: false }]) };
+    _renderCanaisVenda();
+  }
+
+  function _removeCanalVenda(idx) {
+    var list = _collectCanaisVenda();
+    list.splice(idx, 1);
+    _config.canais_venda = { list: list };
+    _renderCanaisVenda();
+  }
+
   function _paint(title, desc, body, collect) {
     var content = document.getElementById('config-content');
     content.innerHTML = '<div class="settings-card">' +
@@ -428,6 +743,12 @@ Modules.Configuracoes = (function () {
   function _save(key, data) {
     DB.setDocRoot('config', key, data).then(function () {
       _config[key] = data;
+      if (key === 'aparencia') {
+        _config.geral = Object.assign({}, _config.geral || {}, data);
+        DB.setDocRoot('config', 'geral', _config.geral).catch(function (err) {
+          console.error('Config sync geral/aparencia error', err);
+        });
+      }
       UI.toast('Configurações salvas', 'success');
     }).catch(function (err) { UI.toast('Erro: ' + err.message, 'error'); });
   }
@@ -470,7 +791,10 @@ Modules.Configuracoes = (function () {
 
   return {
     render: render, destroy: destroy, _switchSub: _switchSub,
+    _openUsuarioModal: _openUsuarioModal, _saveUsuario: _saveUsuario, _deleteUsuario: _deleteUsuario,
     _openUnidadeModal: _openUnidadeModal, _saveUnidade: _saveUnidade, _deleteUnidade: _deleteUnidade,
-    _openFornecedorModal: _openFornecedorModal, _saveFornecedor: _saveFornecedor, _deleteFornecedor: _deleteFornecedor
+    _openFornecedorModal: _openFornecedorModal, _saveFornecedor: _saveFornecedor, _deleteFornecedor: _deleteFornecedor,
+    _addCanalVenda: _addCanalVenda, _removeCanalVenda: _removeCanalVenda, _saveCanaisVenda: _saveCanaisVenda,
+    _uploadAppearanceImage: _uploadAppearanceImage
   };
 })();
