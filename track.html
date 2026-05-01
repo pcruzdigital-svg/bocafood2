@@ -80,6 +80,15 @@ header{background:var(--white);border-bottom:1px solid var(--gray-mid);padding:1
 const BB_FB_CFG={apiKey:'AIzaSyAZk2mEPXR-VQOOEJWfcdhqoJOhHWjzda4',authDomain:'bocado-brasil.firebaseapp.com',projectId:'bocado-brasil',storageBucket:'bocado-brasil.firebasestorage.app',messagingSenderId:'1083383234261',appId:'1:1083383234261:web:b73a9e9f7df73233d6ec5c'};
 firebase.initializeApp(BB_FB_CFG);
 const db=firebase.firestore();
+var PUBLISHED_TENANT_ID="c7BL3Fz9jmcfKkao2Osth9sROEi1";
+function tenantIdFromUrl(){
+  const params=new URLSearchParams(window.location.search);
+  return params.get('tenant')||params.get('tenantId')||params.get('uid')||window.PUBLISHED_TENANT_ID||PUBLISHED_TENANT_ID||'';
+}
+const TENANT_ID=tenantIdFromUrl();
+function ordersCollection(){
+  return TENANT_ID?db.collection('tenants').doc(TENANT_ID).collection('orders'):db.collection('orders');
+}
 
 const ORDER_ID=new URLSearchParams(window.location.search).get('id');
 const wrap=document.getElementById('wrap');
@@ -181,7 +190,7 @@ if(!ORDER_ID){
   wrap.innerHTML=`<div class="not-found"><div class="not-found-icon">⚠️</div><div class="not-found-title">Enlace inválido</div><div class="not-found-sub">No se encontró el ID del pedido en la URL.</div></div>`;
 }else{
   // Real-time listener
-  db.collection('orders').doc(ORDER_ID).onSnapshot(snap=>{
+  ordersCollection().doc(ORDER_ID).onSnapshot(snap=>{
     render(snap.exists?{id:snap.id,...snap.data()}:null);
   },err=>{
     wrap.innerHTML=`<div class="not-found"><div class="not-found-icon">⚠️</div><div class="not-found-title">Error al cargar</div><div class="not-found-sub">${err.message}</div></div>`;
