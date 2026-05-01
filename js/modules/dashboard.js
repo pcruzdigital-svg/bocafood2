@@ -21,11 +21,7 @@ Modules.Dashboard = (function () {
       '<div id="dash-goal" style="background:#fff;border-radius:14px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,.06);margin-bottom:24px;"></div>' +
       '</div>';
 
-    // Date display
-    var now = new Date();
-    var days = ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'];
-    var months = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
-    document.getElementById('dash-date').textContent = days[now.getDay()] + ', ' + now.getDate() + ' de ' + months[now.getMonth()] + ' de ' + now.getFullYear();
+    document.getElementById('dash-date').textContent = UI.fmtDate(new Date());
 
     _renderQuickActions();
     _loadData();
