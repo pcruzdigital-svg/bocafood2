@@ -7,9 +7,11 @@ Modules.Operacao = (function () {
   var _config = {};
 
   var TABS = [
-    { key: 'status', label: '🟢 Status da Loja' },
-    { key: 'horarios', label: '🕐 Horários' },
-    { key: 'zonas', label: '📍 Zonas de Entrega' }
+    { key: 'status', label: 'Status da loja' },
+    { key: 'horarios', label: 'Horários' },
+    { key: 'zonas', label: 'Zonas de entrega' },
+    { key: 'pagamentos', label: 'Pagamentos' },
+    { key: 'endereco', label: 'Endereço' }
   ];
 
   var DAYS = ['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado'];
@@ -19,7 +21,7 @@ Modules.Operacao = (function () {
     var app = document.getElementById('app');
     app.innerHTML = '<div id="op-root" style="display:flex;flex-direction:column;height:100%;">' +
       '<div style="background:#fff;border-bottom:1px solid #F2EDED;padding:0 24px;">' +
-      '<h1 style="font-family:\'League Spartan\',sans-serif;font-size:24px;font-weight:800;padding:20px 0 0;">⚙️ Operação</h1>' +
+      '<h1 style="font-family:\'League Spartan\',sans-serif;font-size:24px;font-weight:800;padding:20px 0 0;">Operação</h1>' +
       '<div id="op-tabs" style="display:flex;gap:0;"></div>' +
       '</div>' +
       '<div id="op-content" style="flex:1;overflow-y:auto;padding:24px;max-width:800px;"></div>' +
@@ -48,13 +50,17 @@ Modules.Operacao = (function () {
     return Promise.all([
       DB.getDocRoot('config', 'operacao'),
       DB.getDocRoot('config', 'horarios'),
-      DB.getDocRoot('config', 'zonas')
+      DB.getDocRoot('config', 'zonas'),
+      DB.getDocRoot('config', 'pagamentos'),
+      DB.getDocRoot('config', 'endereco')
     ]).then(function (r) {
       _config.operacao = r[0] || {};
       _config.horarios = r[1] || {};
       _config.zonas = r[2] || { list: [] };
+      _config.pagamentos = r[3] || {};
+      _config.endereco = r[4] || {};
     }).catch(function () {
-      _config = { operacao: {}, horarios: {}, zonas: { list: [] } };
+      _config = { operacao: {}, horarios: {}, zonas: { list: [] }, pagamentos: {}, endereco: {} };
     });
   }
 
@@ -62,6 +68,8 @@ Modules.Operacao = (function () {
     if (key === 'status') _renderStatus();
     else if (key === 'horarios') _renderHorarios();
     else if (key === 'zonas') _renderZonas();
+    else if (key === 'pagamentos') _renderPagamentos();
+    else if (key === 'endereco') _renderEndereco();
   }
 
   // ── STATUS ────────────────────────────────────────────────────────────────
@@ -110,6 +118,102 @@ Modules.Operacao = (function () {
       UI.toast('Status salvo!', 'success');
       _renderStatus();
     }).catch(function (err) { UI.toast('Erro: ' + err.message, 'error'); });
+  }
+
+  function _renderPagamentos() {
+    var c = _config.pagamentos || {};
+    var methods = c.paymentMethods || [];
+    var content = document.getElementById('op-content');
+    content.innerHTML = '<h2 style="font-size:20px;font-weight:800;margin-bottom:20px;">Pagamentos</h2>' +
+      '<div style="background:#fff;border-radius:14px;padding:24px;box-shadow:0 2px 8px rgba(0,0,0,.06);">' +
+      '<div style="font-size:13px;color:#8A7E7C;margin-bottom:16px;">Formas de pagamento que aparecem para o cliente no site.</div>' +
+      '<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:12px;">' +
+        _checkField('op-pay-cash', 'Dinheiro', c.cash !== false || methods.indexOf('cash') >= 0) +
+        _checkField('op-pay-card', 'Cartão', c.card !== false || methods.indexOf('card') >= 0) +
+        _checkField('op-pay-mbway', 'MB WAY', !!c.mbway || methods.indexOf('mbway') >= 0) +
+      '</div>' +
+      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">' +
+        _field('op-mbway-phone', 'Telefone MB WAY', c.mbwayPhone || '', '+351...') +
+        _field('op-bank-info', 'Dados bancários / referência', c.bankInfo || '', 'IBAN ou instruções') +
+      '</div>' +
+      '<button onclick="Modules.Operacao._savePagamentos()" style="width:100%;padding:13px;border-radius:11px;border:none;background:#C4362A;color:#fff;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;">Salvar pagamentos</button>' +
+      '</div>';
+  }
+
+  function _savePagamentos() {
+    var paymentMethods = [];
+    if (_checked('op-pay-cash')) paymentMethods.push('cash');
+    if (_checked('op-pay-card')) paymentMethods.push('card');
+    if (_checked('op-pay-mbway')) paymentMethods.push('mbway');
+    var data = Object.assign({}, _config.pagamentos, {
+      cash: _checked('op-pay-cash'),
+      card: _checked('op-pay-card'),
+      mbway: _checked('op-pay-mbway'),
+      paymentMethods: paymentMethods,
+      mbwayPhone: _val('op-mbway-phone'),
+      bankInfo: _val('op-bank-info')
+    });
+    DB.setDocRoot('config', 'pagamentos', data).then(function () {
+      _config.pagamentos = data;
+      UI.toast('Pagamentos salvos!', 'success');
+      _renderPagamentos();
+    }).catch(function (err) { UI.toast('Erro: ' + err.message, 'error'); });
+  }
+
+  function _renderEndereco() {
+    var c = _config.endereco || {};
+    var content = document.getElementById('op-content');
+    content.innerHTML = '<h2 style="font-size:20px;font-weight:800;margin-bottom:20px;">Endereço</h2>' +
+      '<div style="background:#fff;border-radius:14px;padding:24px;box-shadow:0 2px 8px rgba(0,0,0,.06);">' +
+      '<div style="font-size:13px;color:#8A7E7C;margin-bottom:16px;">Dados físicos do negócio e contato principal.</div>' +
+      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">' +
+        _field('op-address-line', 'Endereço', c.addressLine || c.pickupAddress || '', 'Rua...') +
+        _field('op-city', 'Cidade', c.city || '', 'Lisboa') +
+        _field('op-postal', 'Código postal', c.postalCode || '', '1000-000') +
+        _field('op-pickup-area', 'Área / bairro para retirada', c.pickupArea || '', 'Centro') +
+        _field('op-phone', 'Telefone', c.phone || '', '+351...') +
+        _field('op-email', 'E-mail', c.email || '', 'contato@...') +
+      '</div>' +
+      '<button onclick="Modules.Operacao._saveEndereco()" style="width:100%;padding:13px;border-radius:11px;border:none;background:#C4362A;color:#fff;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;">Salvar endereço</button>' +
+      '</div>';
+  }
+
+  function _saveEndereco() {
+    var data = {
+      addressLine: _val('op-address-line'),
+      pickupAddress: _val('op-address-line'),
+      pickupArea: _val('op-pickup-area'),
+      city: _val('op-city'),
+      postalCode: _val('op-postal'),
+      phone: _val('op-phone'),
+      email: _val('op-email')
+    };
+    DB.setDocRoot('config', 'endereco', data).then(function () {
+      _config.endereco = data;
+      UI.toast('Endereço salvo!', 'success');
+      _renderEndereco();
+    }).catch(function (err) { UI.toast('Erro: ' + err.message, 'error'); });
+  }
+
+  function _field(id, label, value, placeholder) {
+    return '<label style="display:block;"><span style="font-size:11px;font-weight:700;color:#8A7E7C;display:block;margin-bottom:4px;">' + label + '</span><input id="' + id + '" type="text" value="' + _esc(value || '') + '" placeholder="' + (placeholder || '') + '" style="width:100%;padding:10px;border:1.5px solid #D4C8C6;border-radius:9px;font-size:14px;font-family:inherit;outline:none;"></label>';
+  }
+
+  function _checkField(id, label, checked) {
+    return '<label style="display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #EEE6E4;border-radius:12px;background:' + (checked ? '#EDFAF3' : '#fff') + ';">' +
+      '<input id="' + id + '" type="checkbox" ' + (checked ? 'checked' : '') + ' style="accent-color:#C4362A;width:16px;height:16px;">' +
+      '<span style="font-size:13px;font-weight:700;color:#1A1A1A;">' + label + '</span>' +
+    '</label>';
+  }
+
+  function _val(id) {
+    var el = document.getElementById(id);
+    return el ? (el.value || '').trim() : '';
+  }
+
+  function _checked(id) {
+    var el = document.getElementById(id);
+    return !!(el && el.checked);
   }
 
   // ── HORÁRIOS ──────────────────────────────────────────────────────────────
@@ -256,6 +360,7 @@ Modules.Operacao = (function () {
     _switchSub: _switchSub,
     _toggleStore: _toggleStore, _saveStatus: _saveStatus,
     _toggleDay: _toggleDay, _saveHorarios: _saveHorarios,
+    _savePagamentos: _savePagamentos, _saveEndereco: _saveEndereco,
     _addZone: _addZone, _removeZone: _removeZone
   };
 })();
