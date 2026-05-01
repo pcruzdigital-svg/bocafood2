@@ -21,7 +21,7 @@ window.Router = (function () {
 
     AdminApp.showApp();
 
-    var hash = window.location.hash.replace('#', '') || 'dashboard';
+    var hash = window.location.hash.replace('#', '') || 'performance';
     var parts = hash.split('/');
     var base = parts[0];
     var sub = parts.slice(1).join('/');
@@ -30,8 +30,8 @@ window.Router = (function () {
     var module = _routes[hash] || _routes[base];
 
     if (!module) {
-      module = _routes['dashboard'];
-      base = 'dashboard';
+      module = _routes['performance'];
+      base = 'performance';
       sub = '';
     }
 
@@ -63,6 +63,8 @@ window.Router = (function () {
       var parent = exact.closest('.nav-group');
       if (parent) {
         parent.classList.add('expanded');
+        var parentItem = parent.querySelector('.nav-item');
+        if (parentItem) parentItem.classList.add('active');
         var sub = parent.querySelector('.nav-sub');
         if (sub) sub.style.display = 'block';
       }
@@ -74,7 +76,7 @@ window.Router = (function () {
   }
 
   function current() {
-    return window.location.hash.replace('#', '') || 'dashboard';
+    return window.location.hash.replace('#', '') || 'performance';
   }
 
   // Listen for hash changes
