@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://pcruzdigital-svg.github.io/bocafood2/sitemap.xml
